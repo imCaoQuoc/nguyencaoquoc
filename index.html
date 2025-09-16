@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Nguyen Cao Quoc – AI Engineer</title>
     <meta name="description" content="Resume website for Nguyen Cao Quoc – AI Engineer (Face Recognition, CV, LLMs/VLMs, YOLOv10, FastAPI, RAG)." />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%234f46e5'/%3E%3Ctext x='32' y='39' font-size='28' text-anchor='middle' fill='white' font-family='Arial'%3EQ%3C/text%3E%3C/svg%3E"/>
     <style>
       :root {
         --bg: #0b0c10;
@@ -29,356 +28,184 @@
         --card: #ffffff;
         --accent: #0ea5e9;
       }
-      html, body, main { height: 100%; }
-      body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: var(--bg); color: var(--text); }
+      body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; background: var(--bg); color: var(--text); }
       .container { width: min(1100px, 92vw); margin: 0 auto; }
-      .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(8px); background: color-mix(in srgb, var(--bg) 70%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
-      .nav-inner { display: flex; align-items: center; gap: 1rem; justify-content: space-between; padding: .75rem 0; }
-      .brand { font-weight: 800; letter-spacing: .2px; display: flex; align-items: center; gap: .5rem; }
-      .brand .role { font-weight: 600; color: var(--muted); font-size: .95rem; }
-      .links { display: none; gap: 1rem; list-style: none; padding: 0; margin: 0; }
+      .nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 70%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent); }
+      .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: .75rem 0; }
+      .brand { font-weight: 800; }
+      .links { display: flex; gap: 1rem; list-style: none; padding: 0; margin: 0; }
       .links a { color: var(--text); text-decoration: none; opacity: .8; }
       .links a:hover { opacity: 1; }
       .toggle { background: var(--surface); color: var(--text); border: 1px solid color-mix(in srgb, var(--text) 12%, transparent); padding: .5rem .6rem; border-radius: .6rem; cursor: pointer; }
-      @media (min-width: 800px) { .links { display: flex; } }
-
-      .hero { position: relative; overflow: hidden; }
-      .hero-inner { padding: 3rem 0 1.5rem; display: grid; gap: 1rem; }
-      h1 { font-size: clamp(1.8rem, 3vw + 1rem, 3rem); line-height: 1.1; margin: 0; }
+      .hero { padding: 3rem 0; text-align: center; }
       .accent { background: linear-gradient(90deg, var(--accent), var(--primary-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-      .lead { color: var(--muted); max-width: 72ch; }
-      .contact { display: flex; gap: .75rem; flex-wrap: wrap; font-size: .95rem; }
-      .badge { background: color-mix(in srgb, var(--text) 12%, transparent); border: 1px solid color-mix(in srgb, var(--text) 18%, transparent); padding: .4rem .6rem; border-radius: .6rem; }
-      .hero-bg { position: absolute; inset: -20% -10% auto -10%; height: 60%; background: radial-gradient(60% 60% at 50% 0%, color-mix(in srgb, var(--primary) 16%, transparent) 0%, transparent 60%); pointer-events: none; animation: float 12s ease-in-out infinite; }
-      @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(10px); } }
-
       .section { padding: 2rem 0; }
-      .section h2 { margin: 0 0 .5rem; }
-      .section-lead { color: var(--muted); margin: 0 0 1rem; }
-
-      .grid { display: grid; gap: 1rem; }
-      .two { grid-template-columns: 1fr; }
-      @media (min-width: 900px) { .two { grid-template-columns: 2fr 1fr; } }
-
-      .card { background: var(--card); border: 1px solid color-mix(in srgb, var(--text) 10%, transparent); border-radius: 1rem; padding: 1rem; }
-      .split { display: flex; justify-content: space-between; align-items: start; gap: 1rem; }
-      .role h3 { margin: 0; font-size: 1.05rem; }
-      .role .meta { color: var(--muted); font-size: .95rem; }
-      .list { margin: .5rem 0 0 1.1rem; }
-      .list li { margin: .3rem 0; }
-
+      .card { background: var(--card); border: 1px solid color-mix(in srgb, var(--text) 10%, transparent); border-radius: 1rem; padding: 1rem; margin-bottom: 1rem; }
+      .timeline .titem { margin-bottom: 2rem; }
       .pillset { display: flex; flex-wrap: wrap; gap: .5rem; }
       .pill { padding: .35rem .55rem; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--text) 18%, transparent); background: var(--surface); font-size: .9rem; }
-
-      .footer { border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent); background: color-mix(in srgb, var(--bg) 70%, transparent); }
-      .footer-inner { padding: 1rem 0; display: flex; justify-content: space-between; align-items: center; }
-      .btn { appearance: none; border: 1px solid transparent; background: var(--surface); color: var(--text); padding: .55rem .8rem; border-radius: .7rem; cursor: pointer; text-decoration: none; display: inline-flex; gap: .4rem; align-items: center; font-weight: 600; }
-      .btn.primary { background: linear-gradient(90deg, var(--primary), var(--primary-2)); color: white; }
-      .btn:hover { transform: translateY(-1px); }
-      .tagline { color: var(--muted); }
-
-      /* timeline */
-      .timeline { position: relative; padding-left: 1rem; }
-      .timeline::before { content: ""; position: absolute; left: .25rem; top: .25rem; bottom: .25rem; width: 2px; background: color-mix(in srgb, var(--text) 15%, transparent); }
-      .titem { position: relative; padding-left: 1rem; margin-bottom: 1rem; }
-      .titem::before { content: ""; position: absolute; left: -2px; top: .35rem; width: .6rem; height: .6rem; background: var(--primary); border-radius: 50%; box-shadow: 0 0 0 3px var(--ring); }
-
-      a { color: var(--accent); }
+      .footer { border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent); text-align: center; padding: 1rem 0; }
     </style>
   </head>
   <body>
     <nav class="nav">
       <div class="container nav-inner">
-        <div class="brand">
-          <span>NGUYEN CAO QUOC</span>
-          <span class="role">AI ENGINEER</span>
-        </div>
+        <div class="brand">NGUYEN CAO QUOC – AI ENGINEER</div>
         <ul class="links">
-          <li><a href="#summary">Summary</a></li>
           <li><a href="#experience">Experience</a></li>
+          <li><a href="#achievements">Honor & Award</a></li>
           <li><a href="#skills">Skills</a></li>
-          <li><a href="#achievements">Achievements</a></li>
           <li><a href="#education">Education</a></li>
+          <li><a href="#certificates">Certificates</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-        <div style="display:flex;gap:.5rem;align-items:center;">
-          <a class="btn" href="https://linkedin.com/in/caoquocnguyen" target="_blank" rel="noreferrer">LinkedIn</a>
-          <button aria-label="Toggle theme" class="toggle btn" id="themeToggle">🌙</button>
-        </div>
+        <button aria-label="Toggle theme" class="toggle" id="themeToggle">🌙</button>
       </div>
     </nav>
 
     <header class="hero">
-      <div class="container hero-inner">
-        <h1>AI Engineer with strong IT foundation and passion for <span class="accent">AI & Data</span>.</h1>
-        <p class="lead">Currently pursuing a Master's degree focusing on research in Computer Vision and LLMs/VLMs. ~2 year of AI research/industry experience solving real-world problems. Motivated to learn deeply and tackle challenging, practical problems.</p>
-        <div class="contact">
-          <a class="badge" href="tel:+84349539278">+ (84) 349539278</a>
-          <a class="badge" href="mailto:caoquoc.job@gmail.com">caoquoc.job@gmail.com</a>
-          <a class="badge" href="https://linkedin.com/in/caoquocnguyen" target="_blank" rel="noreferrer">linkedin.com/in/caoquocnguyen</a>
-        </div>
+      <div class="container">
+        <h1>AI Engineer passionate about <span class="accent">Computer Vision & LLMs</span></h1>
+        <p>Master’s student with ~1 year of AI research/industry experience in Face Recognition, SKU Detection, and Agentic AI Platforms.</p>
       </div>
-      <div class="hero-bg" aria-hidden="true"></div>
     </header>
 
-    <main class="container">
-      <!-- SUMMARY -->
-      <section id="summary" class="section">
-        <h2>Summary</h2>
-        <p class="section-lead">I am an AI Engineer with a strong foundation in IT and a passion for AI and data. I am pursuing a master's degree focused on Computer Vision and LLMs/VLMs. I have worked in AI research/industry for about one year across diverse real-world problems and I love to resolve challenging practical problems.</p>
-      </section>
-
-      <!-- EXPERIENCE -->
-      <section id="experience" class="section">
-        <h2>Professional Experience</h2>
-        <div class="grid two">
-          <div class="card timeline">
-            <!-- VinAI -->
-            <div class="titem">
-              <div class="split">
-                <div class="role">
-                  <h3>AI Engineer Intern — VinAI Research</h3>
-                  <div class="meta">Face Recognition System · Sep 2024 – Jan 2025</div>
-                </div>
-              </div>
-              <h4>Image Data Preprocessing for Training</h4>
-              <ul class="list">
-                <li>Designed workflows to ensure diverse and high-quality datasets.</li>
-                <li>Implemented robust data validation for consistency across training pipelines.</li>
-                <li>Optimized data processing to match model requirements.</li>
-              </ul>
-              <h4>Researching ArcFace Loss and Embedding Selection Techniques</h4>
-              <ul class="list">
-                <li>Researched and integrated <strong>ArcFace Loss</strong> into deep learning models to improve face identification performance.</li>
-                <li>Evaluated models using <strong>TAR@FAR</strong> metrics and accuracy on <strong>IJBB/IJBC</strong>; compared against baselines.</li>
-                <li>Documented implementation and experiments; proposed enhancements.</li>
-                <li>Analyzed <strong>Cosine Scheduler</strong> impact on learning rate and convergence; integrated it into training pipelines and reported accuracy/efficiency improvements.</li>
-              </ul>
-              <h4>Building Demos and Presenting</h4>
-              <ul class="list">
-                <li>Used <strong>FastAPI</strong> to develop interactive demos showcasing capabilities.</li>
-                <li>Created visualizations and presentations for technical and non-technical audiences.</li>
-                <li>Collected feedback and iteratively improved demo quality.</li>
-              </ul>
-            </div>
-
-            <!-- TMA Solutions -->
-            <div class="titem">
-              <div class="split">
-                <div class="role">
-                  <h3>Junior AI Engineer — TMA Solutions</h3>
-                  <div class="meta">Nov 2024 – Jan 2025</div>
-                </div>
-              </div>
-              <h4>Agentic Platform</h4>
-              <ul class="list">
-                <li>Used <strong>LangChain</strong> and <strong>LangGraph</strong> to design and implement AI Agents for healthcare and marketing applications.</li>
-                <li>Developed a <strong>dynamic language module</strong> enabling adaptive, context-aware agent behavior.</li>
-                <li>Engineered intelligent workflows for hospital use cases (ophthalmology) to enhance process automation and clinical decision support.</li>
-                <li>Documented research findings and proposed improvements to platform scalability and reliability.</li>
-              </ul>
-              <h4>Mall Agency Platform</h4>
-              <ul class="list">
-                <li>Built and maintained a structured store management database to ensure accurate and up-to-date retail information.</li>
-                <li>Applied the <strong>A*</strong> search algorithm to develop intelligent indoor navigation features optimizing routing and travel time.</li>
-                <li>Used <strong>FastMCP</strong> to design AI-driven tools assisting customers before, during, and after mall visits.</li>
-                <li>Integrated data-driven personalization to improve customer satisfaction and operational efficiency.</li>
-              </ul>
-              <h4>CRM/ERP Platform</h4>
-              <ul class="list">
-                <li>Developed and optimized lead scoring with AI using HubSpot API to prioritize sales opportunities.</li>
-                <li>Built AI tools for generating automated quotations with FastMCP, reducing manual effort and response time.</li>
-                <li>Fine-tuned LLM prompts for product–quantity matching from natural language; reduced matching errors.</li>
-                <li>Researched and deployed a recommendation system (collaborative filtering) for personalized suggestions.</li>
-                <li>Delivered insights and enhancements to streamline sales processes and strengthen decision-making.</li>
-              </ul>
-            </div>
-
-            <!-- VietVang -->
-            <div class="titem">
-              <div class="split">
-                <div class="role">
-                  <h3>AI Engineer — VietVang Consulting &amp; Solutions JSC</h3>
-                  <div class="meta">Stock Keeping Unit Detection &amp; Counting · Jan 2024 – Sep 2024</div>
-                </div>
-              </div>
-              <h4>Image Data Preprocessing and Labeling</h4>
-              <ul class="list">
-                <li>Created and labeled image datasets using advanced tools; ensured reliable training data for SKU detection and counting.</li>
-                <li>Tailored data processing to meet customer and model requirements; improved compatibility and training efficiency.</li>
-                <li>Created and improved SKU evaluation criteria; standardized quality checks for consistent assessment.</li>
-              </ul>
-              <h4>Research YOLOv10 and Innovative Solutions</h4>
-              <ul class="list">
-                <li>Researched YOLOv10 architecture; compiled detailed documentation for project team reference.</li>
-                <li>Fine-tuned model on custom datasets; evaluated performance using precision and recall; increased accuracy on real-world data.</li>
-                <li>Refined model to improve accuracy; delivered better detection results for customers.</li>
-              </ul>
-              <h4>Customer Problem Solving</h4>
-              <ul class="list">
-                <li>Diagnosed and resolved customer issues by collaborating with customers, project manager, and CEO.</li>
-                <li>Implemented solutions that enhanced customer satisfaction.</li>
-              </ul>
-              <h4>Demo Development and Presentation</h4>
-              <ul class="list">
-                <li>Developed interactive demos to showcase YOLOv10 capabilities; helped customers understand AI applications.</li>
-                <li>Designed and implemented APIs to support development teams in building customer-facing applications.</li>
-                <li>Developed comprehensive documentation and interactive API specs; supported backend teams to accelerate deployment.</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Sidebar: Achievements & Certifications -->
-          <aside class="card">
-            <section id="achievements">
-              <h3>Honors &amp; Awards</h3>
-              <p class="tagline"><strong>First Prize – SOICT Hackathon 2024</strong> (AI‑Powered Application)</p>
-              <h4 style="margin:.5rem 0 0">Project: Chatbot for Administrative Documents</h4>
-              <ul class="list">
-                <li>Utilized Python and <strong>Llama‑Cloud API</strong> to process raw data; ensured consistency and quality.</li>
-                <li>Used <strong>LlamaIndex API</strong> to convert data into markdown; preserved table content.</li>
-                <li>Employed <strong>OpenAI API</strong> to generate FAQ pairs; automated and streamlined the process.</li>
-                <li>Conducted quality checks and evaluations; fine‑tuned for accuracy and relevance.</li>
-                <li>Collaborated to design, build, and test the chatbot flow for seamless UX.</li>
-              </ul>
-
-              <h3 style="margin-top:1rem">Certifications</h3>
-              <ul class="list">
-                <li>IELTS 6.0 (English Certification)</li>
-                <li>IBM AI Engineer — Coursera Professional Certificate</li>
-                <li>IBM Data Scientist — Coursera Professional Certificate</li>
-              </ul>
-            </section>
-          </aside>
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section container">
+      <h2>Professional Experience</h2>
+      <div class="timeline">
+        <div class="titem card">
+          <h3>Junior AI Engineer — TMA Solutions</h3>
+          <p><em>Jan 2025 – Present</em></p>
+          <ul>
+            <li>Developed AI Agents using LangChain/LangGraph for healthcare and marketing.</li>
+            <li>Built dynamic language module for adaptive agent behavior.</li>
+            <li>Engineered workflows for hospital ophthalmology use cases.</li>
+            <li>Maintained store management DB, applied A* for indoor navigation, built FastMCP tools for mall services.</li>
+            <li>Developed AI-based lead scoring, automated quotation tools, and recommender system in CRM/ERP platform.</li>
+          </ul>
         </div>
-      </section>
-
-      <!-- SKILLS -->
-      <section id="skills" class="section">
-        <h2>Technical &amp; Soft Skills</h2>
-        <div class="card">
-          <h3>Technical Skills</h3>
-          <div class="pillset">
-            <span class="pill">Artificial Intelligence</span>
-            <span class="pill">Machine Learning</span>
-            <span class="pill">Deep Learning</span>
-            <span class="pill">Retrieval‑Augmented Generation</span>
-            <span class="pill">NLP</span>
-            <span class="pill">Computer Vision</span>
-            <span class="pill">TensorFlow</span>
-            <span class="pill">PyTorch</span>
-            <span class="pill">LlamaIndex</span>
-            <span class="pill">Pandas</span>
-            <span class="pill">NumPy</span>
-            <span class="pill">SQL</span>
-            <span class="pill">Python</span>
-            <span class="pill">C++</span>
-            <span class="pill">Selenium</span>
-            <span class="pill">FastAPI</span>
-            <span class="pill">ArcFace</span>
-            <span class="pill">YOLOv10</span>
-            <span class="pill">RAG</span>
-            <span class="pill">IJBB/IJBC</span>
-            <span class="pill">TAR@FAR</span>
-          </div>
+        <div class="titem card">
+          <h3>AI Engineer Intern — VinAI Research</h3>
+          <p><em>Sep 2024 – Jan 2025</em></p>
+          <ul>
+            <li>Designed image preprocessing workflows and validation pipelines.</li>
+            <li>Researched ArcFace Loss, embedding selection; evaluated TAR@FAR on IJBB/IJBC.</li>
+            <li>Integrated Cosine LR scheduler, improved convergence.</li>
+            <li>Built FastAPI demos; presented solutions to diverse audiences.</li>
+          </ul>
         </div>
-
-        <div class="grid two" style="margin-top:1rem;">
-          <div class="card">
-            <h3>Soft Skills</h3>
-            <div class="pillset">
-              <span class="pill">Adaptable</span>
-              <span class="pill">Proactive</span>
-              <span class="pill">Quick Learning</span>
-              <span class="pill">Problem Solving</span>
-              <span class="pill">Able to handle pressure well</span>
-              <span class="pill">Hard‑working</span>
-            </div>
-          </div>
-          <div class="card">
-            <h3>Focus Areas</h3>
-            <div class="pillset">
-              <span class="pill">Face Recognition</span>
-              <span class="pill">LLMs/VLMs</span>
-              <span class="pill">Retrieval</span>
-              <span class="pill">Production APIs</span>
-            </div>
-          </div>
+        <div class="titem card">
+          <h3>AI Engineer — VietVang Consulting & Solutions JSC</h3>
+          <p><em>Jan 2024 – Sep 2024</em></p>
+          <ul>
+            <li>Labeled datasets, refined SKU evaluation criteria.</li>
+            <li>Researched and fine-tuned YOLOv10; improved detection accuracy.</li>
+            <li>Collaborated with PM/CEO to resolve customer issues.</li>
+            <li>Built FastAPI services, interactive API docs, supported backend teams.</li>
+          </ul>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- EDUCATION -->
-      <section id="education" class="section">
-        <h2>Education</h2>
-        <div class="grid two">
-          <div class="card">
-            <div class="split">
-              <div>
-                <h3>Master of Computer Science</h3>
-                <div class="tagline">University of Information Technology, VNU‑HCMC</div>
-              </div>
-              <div class="tagline">2024 – Present</div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="split">
-              <div>
-                <h3>Bachelor of Computer Science</h3>
-                <div class="tagline">University of Information Technology, VNU‑HCMC</div>
-              </div>
-              <div class="tagline">2020 – 2024 · GPA: 7.27</div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <!-- HONOR & AWARD -->
+    <section id="achievements" class="section container">
+      <h2>Honor & Award</h2>
+      <div class="card">
+        <h3>SOICT Hackathon 2024 – First Prize</h3>
+        <p>Project: Chatbot for Administrative Documents</p>
+        <ul>
+          <li>Parsed data with Llama‑Cloud and LlamaIndex, preserved tables.</li>
+          <li>Generated FAQ pairs with OpenAI API, performed QA and refinement.</li>
+          <li>Designed and tested chatbot flow for smooth UX.</li>
+        </ul>
+      </div>
+    </section>
 
-      <!-- CONTACT/CTA -->
-      <section id="contact" class="section">
-        <h2>Contact</h2>
-        <div class="card split" style="flex-wrap:wrap;">
-          <div>
-            <p class="tagline">Open to AI/ML roles and research‑oriented internships. Prefer projects in Face Recognition, CV, and LLM tooling.</p>
-          </div>
-          <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
-            <a class="btn primary" href="mailto:caoquoc.job@gmail.com">Email Me</a>
-            <a class="btn" href="https://linkedin.com/in/caoquocnguyen" target="_blank" rel="noreferrer">LinkedIn</a>
-            <!-- If you add your PDF resume to the repo root as resume.pdf, this button will work: -->
-            <a class="btn" href="resume.pdf" target="_blank" rel="noreferrer">Download CV (PDF)</a>
-          </div>
+    <!-- SKILLS -->
+    <section id="skills" class="section container">
+      <h2>Skills</h2>
+      <div class="card">
+        <h3>Technical Skills</h3>
+        <div class="pillset">
+          <span class="pill">Python</span>
+          <span class="pill">C++</span>
+          <span class="pill">PyTorch</span>
+          <span class="pill">TensorFlow</span>
+          <span class="pill">Computer Vision</span>
+          <span class="pill">NLP</span>
+          <span class="pill">RAG</span>
+          <span class="pill">YOLOv10</span>
+          <span class="pill">FastAPI</span>
+          <span class="pill">LlamaIndex</span>
+          <span class="pill">ArcFace</span>
+          <span class="pill">SQL</span>
         </div>
-      </section>
-    </main>
+      </div>
+      <div class="card">
+        <h3>Soft Skills</h3>
+        <div class="pillset">
+          <span class="pill">Adaptable</span>
+          <span class="pill">Proactive</span>
+          <span class="pill">Quick Learner</span>
+          <span class="pill">Problem Solving</span>
+          <span class="pill">Hard‑working</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="section container">
+      <h2>Education</h2>
+      <div class="card">
+        <h3>Master of Computer Science</h3>
+        <p>University of Information Technology, VNU‑HCMC (2024 – Present)</p>
+      </div>
+      <div class="card">
+        <h3>Bachelor of Computer Science</h3>
+        <p>University of Information Technology, VNU‑HCMC (2020 – 2024) · GPA: 7.27</p>
+      </div>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section id="certificates" class="section container">
+      <h2>Certificates</h2>
+      <div class="card">
+        <ul>
+          <li>IELTS 6.0</li>
+          <li>IBM AI Engineer – Coursera Professional Certificate</li>
+          <li>IBM Data Scientist – Coursera Professional Certificate</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section container">
+      <h2>Contact</h2>
+      <div class="card">
+        <p>Email: <a href="mailto:caoquoc.job@gmail.com">caoquoc.job@gmail.com</a></p>
+        <p>Phone: <a href="tel:+84349539278">+84 349 539 278</a></p>
+        <p>LinkedIn: <a href="https://linkedin.com/in/caoquocnguyen" target="_blank">linkedin.com/in/caoquocnguyen</a></p>
+      </div>
+    </section>
 
     <footer class="footer">
-      <div class="container footer-inner">
-        <span>© <span id="year"></span> Nguyen Cao Quoc</span>
-        <!-- Back to top removed per user request -->
+      <div class="container">
+        © <span id="year"></span> Nguyen Cao Quoc
       </div>
     </footer>
 
     <script>
-      // Theme persistence
-      (function() {
-        var root = document.documentElement;
-        var saved = localStorage.getItem('theme');
-        if (saved === 'dark' || saved === 'light') {
-          root.setAttribute('data-theme', saved);
-          try { document.getElementById('themeToggle').textContent = saved === 'light' ? '🌙' : '☀️'; } catch(e){}
-        }
-      })();
       (function(){
-        var btn = document.getElementById('themeToggle');
-        if(!btn) return;
-        btn.addEventListener('click', function(){
-          var root = document.documentElement;
-          var current = root.getAttribute('data-theme') || 'light';
-          var next = current === 'light' ? 'dark' : 'light';
-          root.setAttribute('data-theme', next);
-          localStorage.setItem('theme', next);
-          btn.textContent = next === 'light' ? '🌙' : '☀️';
+        var root=document.documentElement;var saved=localStorage.getItem('theme');
+        if(saved){root.setAttribute('data-theme',saved);document.getElementById('themeToggle').textContent=saved==='light'?'🌙':'☀️'}
+        document.getElementById('themeToggle').addEventListener('click',function(){
+          var current=root.getAttribute('data-theme')||'light';var next=current==='light'?'dark':'light';
+          root.setAttribute('data-theme',next);localStorage.setItem('theme',next);
+          this.textContent=next==='light'?'🌙':'☀️';
         });
       })();
-      document.getElementById('year').textContent = new Date().getFullYear();
+      document.getElementById('year').textContent=new Date().getFullYear();
     </script>
   </body>
 </html>
