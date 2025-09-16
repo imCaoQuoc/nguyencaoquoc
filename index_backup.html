@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nguyen Cao Quoc – AI Engineer</title>
+    <meta name="description" content="AI Engineer with expertise in Computer Vision, LLMs/VLMs, Face Recognition, and Agentic AI Platforms. Master's student with 2 years of industry experience." />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #0b0c10;
+        --surface: #0f1115;
+        --text: #e6e6e6;
+        --muted: #a1a1aa;
+        --primary: #4f46e5;
+        --primary-2: #6366f1;
+        --ring: rgba(79, 70, 229, 0.5);
+        --card: #111318;
+        --accent: #22d3ee;
+        --success: #10b981;
+        --warning: #f59e0b;
+      }
+      [data-theme="light"] {
+        --bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --surface: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --primary: #4f46e5;
+        --primary-2: #6366f1;
+        --ring: rgba(79, 70, 229, 0.35);
+        --card: rgba(255, 255, 255, 0.95);
+        --accent: #0ea5e9;
+        --success: #10b981;
+        --warning: #f59e0b;
+      }
+      
+      * { box-sizing: border-box; }
+      
+      body { 
+        margin: 0; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        background: var(--bg); 
+        color: var(--text); 
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+      
+      .container { 
+        width: min(1200px, 95vw); 
+        margin: 0 auto; 
+      }
+      
+      .nav { 
+        position: fixed; 
+        top: 0; 
+        left: 0;
+        right: 0;
+        z-index: 1000; 
+        background: rgba(255, 255, 255, 0.95); 
+        backdrop-filter: blur(20px); 
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+      
+      [data-theme="dark"] .nav {
+        background: rgba(11, 12, 16, 0.95);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .nav-inner { 
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between; 
+        padding: 1rem 0; 
+      }
+      
+      .brand { 
+        font-weight: 800; 
+        font-size: 1.1rem;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      
+      .links { 
+        display: flex; 
+        gap: 2rem; 
+        list-style: none; 
+        padding: 0; 
+        margin: 0; 
+      }
+      
+      @media (max-width: 768px) {
+        .links { display: none; }
+      }
+      
+      .links a { 
+        color: var(--text); 
+        text-decoration: none; 
+        opacity: 0.8; 
+        transition: all 0.3s ease;
+        position: relative;
+        padding: 0.5rem 0;
+      }
+      
+      .links a:hover { 
+        opacity: 1; 
+        color: var(--primary);
+      }
+      
+      .links a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background: var(--primary);
+        transition: width 0.3s ease;
+      }
+      
+      .links a:hover::after {
+        width: 100%;
+      }
+      
+      .toggle { 
+        background: var(--surface); 
+        color: var(--text); 
+        border: 1px solid rgba(255, 255, 255, 0.1); 
+        padding: 0.7rem; 
+        border-radius: 50%; 
+        cursor: pointer; 
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      .toggle:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+      
+      .hero { 
+        padding: 8rem 0 4rem; 
+        text-align: center; 
+        position: relative;
+        background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(34, 211, 238, 0.1));
+      }
+      
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" fill-opacity="0.05"/><circle cx="75" cy="75" r="1" fill="%23ffffff" fill-opacity="0.05"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" fill-opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        opacity: 0.3;
+        pointer-events: none;
+      }
+      
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+      
+      .hero h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        margin-bottom: 1rem;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto 2rem;
+        opacity: 0.9;
+      }
+      
+      .accent { 
+        background: linear-gradient(135deg, var(--accent), var(--primary)); 
+        -webkit-background-clip: text; 
+        background-clip: text; 
+        color: transparent; 
+        font-weight: 900;
+      }
+      
+      .section { 
+        padding: 4rem 0; 
+      }
+      
+      .section h2 {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 3rem;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 800;
+      }
+      
+      .card { 
+        background: var(--card); 
+        border: 1px solid rgba(255, 255, 255, 0.1); 
+        border-radius: 1.5rem; 
+        padding: 2rem; 
+        margin-bottom: 2rem; 
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(20px);
+      }
+      
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+      
+      .timeline { 
+        position: relative; 
+      }
+      
+      .timeline::before {
+        content: '';
+        position: absolute;
+        left: 2rem;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--primary), var(--accent));
+      }
+      
+      .timeline .titem { 
+        margin-bottom: 3rem; 
+        position: relative;
+        margin-left: 4rem;
+      }
+      
+      .timeline .titem::before {
+        content: '';
+        position: absolute;
+        left: -5rem;
+        top: 1rem;
+        width: 12px;
+        height: 12px;
+        background: var(--primary);
+        border-radius: 50%;
+        border: 3px solid var(--bg);
+        box-shadow: 0 0 0 3px var(--primary);
+      }
+      
+      .pillset { 
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 0.8rem; 
+        margin-top: 1rem;
+      }
+      
+      .pill { 
+        padding: 0.6rem 1rem; 
+        border-radius: 25px; 
+        border: 2px solid transparent;
+        background: linear-gradient(135deg, var(--primary), var(--accent)) padding-box,
+                    linear-gradient(135deg, var(--primary), var(--accent)) border-box;
+        color: white;
+        font-size: 0.9rem; 
+        font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      
+      .pill:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+      }
+      
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.5rem;
+        background: var(--surface);
+        border-radius: 1rem;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+      
+      .contact-item:hover {
+        border-color: var(--primary);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(79, 70, 229, 0.2);
+      }
+      
+      .contact-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+      }
+      
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+      }
+      
+      .stat-card {
+        text-align: center;
+        padding: 2rem;
+        background: var(--card);
+        border-radius: 1rem;
+        border: 2px solid transparent;
+        background-clip: padding-box;
+        position: relative;
+      }
+      
+      .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 1rem;
+        padding: 2px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        -webkit-mask-composite: xor;
+      }
+      
+      .stat-number {
+        font-size: 3rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1;
+      }
+      
+      .stat-label {
+        margin-top: 0.5rem;
+        opacity: 0.8;
+        font-weight: 600;
+      }
+      
+      .footer { 
+        border-top: 1px solid rgba(255, 255, 255, 0.1); 
+        text-align: center; 
+        padding: 2rem 0; 
+        background: var(--surface);
+      }
+      
+      .scroll-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        z-index: 1001;
+      }
+      
+      .scroll-progress {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        width: 0%;
+        transition: width 0.1s ease;
+      }
+      
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+      }
+      
+      .animate-on-scroll.animated {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      @media (max-width: 768px) {
+        .hero { padding: 6rem 0 3rem; }
+        .hero h1 { font-size: 2.5rem; }
+        .section { padding: 3rem 0; }
+        .timeline .titem { margin-left: 2rem; }
+        .timeline::before { left: 1rem; }
+        .timeline .titem::before { left: -3rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="container nav-inner">
+        <div class="brand">NGUYEN CAO QUOC – AI ENGINEER</div>
+        <ul class="links">
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#achievements">Honor & Award</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#certificates">Certificates</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button aria-label="Toggle theme" class="toggle" id="themeToggle">🌙</button>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="container">
+        <h1>AI Engineer passionate about <span class="accent">Computer Vision & LLMs</span></h1>
+        <p>Master’s student with ~1 year of AI research/industry experience in Face Recognition, SKU Detection, and Agentic AI Platforms.</p>
+      </div>
+    </header>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section container">
+      <h2>Professional Experience</h2>
+      <div class="timeline">
+        <div class="titem card">
+          <h3>Junior AI Engineer — TMA Solutions</h3>
+          <p><em>Jan 2025 – Present</em></p>
+          <ul>
+            <li>Developed AI Agents using LangChain/LangGraph for healthcare and marketing.</li>
+            <li>Built dynamic language module for adaptive agent behavior.</li>
+            <li>Engineered workflows for hospital ophthalmology use cases.</li>
+            <li>Maintained store management DB, applied A* for indoor navigation, built FastMCP tools for mall services.</li>
+            <li>Developed AI-based lead scoring, automated quotation tools, and recommender system in CRM/ERP platform.</li>
+          </ul>
+        </div>
+        <div class="titem card">
+          <h3>AI Engineer Intern — VinAI Research</h3>
+          <p><em>Sep 2024 – Jan 2025</em></p>
+          <ul>
+            <li>Designed image preprocessing workflows and validation pipelines.</li>
+            <li>Researched ArcFace Loss, embedding selection; evaluated TAR@FAR on IJBB/IJBC.</li>
+            <li>Integrated Cosine LR scheduler, improved convergence.</li>
+            <li>Built FastAPI demos; presented solutions to diverse audiences.</li>
+          </ul>
+        </div>
+        <div class="titem card">
+          <h3>AI Engineer — VietVang Consulting & Solutions JSC</h3>
+          <p><em>Jan 2024 – Sep 2024</em></p>
+          <ul>
+            <li>Labeled datasets, refined SKU evaluation criteria.</li>
+            <li>Researched and fine-tuned YOLOv10; improved detection accuracy.</li>
+            <li>Collaborated with PM/CEO to resolve customer issues.</li>
+            <li>Built FastAPI services, interactive API docs, supported backend teams.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- HONOR & AWARD -->
+    <section id="achievements" class="section container">
+      <h2>Honor & Award</h2>
+      <div class="card">
+        <h3>SOICT Hackathon 2024 – First Prize</h3>
+        <p>Project: Chatbot for Administrative Documents</p>
+        <ul>
+          <li>Parsed data with Llama‑Cloud and LlamaIndex, preserved tables.</li>
+          <li>Generated FAQ pairs with OpenAI API, performed QA and refinement.</li>
+          <li>Designed and tested chatbot flow for smooth UX.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section container">
+      <h2>Skills</h2>
+      <div class="card">
+        <h3>Technical Skills</h3>
+        <div class="pillset">
+          <span class="pill">Python</span>
+          <span class="pill">C++</span>
+          <span class="pill">PyTorch</span>
+          <span class="pill">TensorFlow</span>
+          <span class="pill">Computer Vision</span>
+          <span class="pill">NLP</span>
+          <span class="pill">RAG</span>
+          <span class="pill">YOLOv10</span>
+          <span class="pill">FastAPI</span>
+          <span class="pill">LlamaIndex</span>
+          <span class="pill">ArcFace</span>
+          <span class="pill">SQL</span>
+          <span class="pill">LangChain</span>
+          <span class="pill">LangGraph</span>
+          <span class="pill">FastMCP</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Soft Skills</h3>
+        <div class="pillset">
+          <span class="pill">Adaptable</span>
+          <span class="pill">Proactive</span>
+          <span class="pill">Quick Learner</span>
+          <span class="pill">Problem Solving</span>
+          <span class="pill">Hard‑working</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="section container">
+      <h2>Education</h2>
+      <div class="card">
+        <h3>Master of Computer Science</h3>
+        <p>University of Information Technology, VNU‑HCMC (2024 – Present)</p>
+      </div>
+      <div class="card">
+        <h3>Bachelor of Computer Science</h3>
+        <p>University of Information Technology, VNU‑HCMC (2020 – 2024) · GPA: 7.27</p>
+      </div>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section id="certificates" class="section container">
+      <h2>Certificates</h2>
+      <div class="card">
+        <ul>
+          <li>IELTS 6.0</li>
+          <li>IBM AI Engineer – Coursera Professional Certificate</li>
+          <li>IBM Data Scientist – Coursera Professional Certificate</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section container">
+      <h2>Contact</h2>
+      <div class="card">
+        <p>Email: <a href="mailto:caoquoc.job@gmail.com">caoquoc.job@gmail.com</a></p>
+        <p>Phone: <a href="tel:+84349539278">+84 349 539 278</a></p>
+        <p>LinkedIn: <a href="https://linkedin.com/in/caoquocnguyen" target="_blank">linkedin.com/in/caoquocnguyen</a></p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        © <span id="year"></span> Nguyen Cao Quoc
+      </div>
+    </footer>
+
+    <script>
+      (function(){
+        var root=document.documentElement;var saved=localStorage.getItem('theme');
+        if(saved){root.setAttribute('data-theme',saved);document.getElementById('themeToggle').textContent=saved==='light'?'🌙':'☀️'}
+        document.getElementById('themeToggle').addEventListener('click',function(){
+          var current=root.getAttribute('data-theme')||'light';var next=current==='light'?'dark':'light';
+          root.setAttribute('data-theme',next);localStorage.setItem('theme',next);
+          this.textContent=next==='light'?'🌙':'☀️';
+        });
+      })();
+      document.getElementById('year').textContent=new Date().getFullYear();
+    </script>
+  </body>
+</html>
