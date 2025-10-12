@@ -98,6 +98,11 @@
         opacity: 1; 
         color: var(--primary);
       }
+
+      .links a.active {
+        color: var(--primary);
+        opacity: 1;
+      }
       
       .links a::after {
         content: '';
@@ -135,6 +140,35 @@
         background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" fill-opacity="0.05"/><circle cx="75" cy="75" r="1" fill="%23ffffff" fill-opacity="0.05"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" fill-opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
         opacity: 0.3;
         pointer-events: none;
+      }
+
+      /* Aurora layers */
+      .aurora {
+        position: absolute;
+        inset: -20% -10% 0 -10%;
+        filter: blur(60px);
+        opacity: 0.5;
+        pointer-events: none;
+        z-index: 1;
+        background: conic-gradient(from 120deg at 50% 50%, rgba(79,70,229,0.0), rgba(79,70,229,0.35), rgba(34,211,238,0.25), rgba(16,185,129,0.2), rgba(79,70,229,0.0));
+        mix-blend-mode: screen;
+        animation: auroraMove 18s ease-in-out infinite alternate;
+      }
+      .aurora::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(600px 200px at 20% 30%, rgba(79,70,229,0.25), transparent 60%),
+                    radial-gradient(800px 260px at 80% 20%, rgba(34,211,238,0.2), transparent 60%);
+        animation: auroraDrift 22s ease-in-out infinite alternate;
+      }
+      @keyframes auroraMove {
+        0% { transform: translateY(-5%) rotate(0deg) scale(1.05); opacity: 0.45; }
+        100% { transform: translateY(5%) rotate(10deg) scale(1.1); opacity: 0.6; }
+      }
+      @keyframes auroraDrift {
+        0% { transform: translateY(0) translateX(0); }
+        100% { transform: translateY(-3%) translateX(2%); }
       }
 
       /* Particles container */
@@ -364,6 +398,29 @@
         mask-composite: exclude;
         -webkit-mask-composite: xor;
       }
+
+      /* CTA buttons */
+      .cta-row { display: flex; gap: 1rem; justify-content: center; margin-top: 1.25rem; flex-wrap: wrap; }
+      .btn {
+        padding: 0.8rem 1.2rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.15);
+        background: linear-gradient(135deg, rgba(79,70,229,0.9), rgba(34,211,238,0.9));
+        color: white; text-decoration: none; font-weight: 700;
+        box-shadow: 0 10px 25px rgba(79,70,229,0.25);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        position: relative; overflow: hidden;
+      }
+      .btn:hover { transform: translateY(-2px); box-shadow: 0 15px 35px rgba(79,70,229,0.35); }
+      .btn.secondary { background: linear-gradient(135deg, rgba(17,24,39,0.8), rgba(31,41,55,0.8)); color: var(--text); }
+      .btn .sheen { position: absolute; inset: 0; background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent); transform: translateX(-120%); }
+      .btn:hover .sheen { transform: translateX(120%); transition: transform 0.8s ease; }
+
+      /* Section divider */
+      .divider {
+        position: relative; height: 80px; overflow: hidden; background: transparent;
+      }
+      .divider svg { position: absolute; left: 50%; transform: translateX(-50%); bottom: -1px; }
       
       .stat-number {
         font-size: 3rem;
@@ -406,6 +463,18 @@
         z-index: 1100;
       }
       .back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+
+      /* Fancy cursor */
+      .cursor, .cursor-ring {
+        position: fixed; pointer-events: none; z-index: 1200; left: 0; top: 0;
+        transform: translate(-50%, -50%);
+      }
+      .cursor { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 12px var(--accent); }
+      .cursor-ring {
+        width: 36px; height: 36px; border-radius: 50%;
+        border: 1px solid rgba(34,211,238,0.45); box-shadow: 0 0 40px rgba(34,211,238,0.25);
+        mix-blend-mode: screen; backdrop-filter: blur(2px);
+      }
       
       .scroll-indicator {
         position: fixed;
@@ -478,6 +547,7 @@
 
     <header class="hero">
       <!-- FX layers -->
+      <div class="aurora" aria-hidden="true"></div>
       <div id="tsparticles" aria-hidden="true"></div>
       <div class="blob b2" aria-hidden="true"></div>
       <div class="blob b3" aria-hidden="true"></div>
@@ -485,15 +555,19 @@
       <div class="container hero-content" data-aos="fade-up" data-aos-duration="800">
         <h1>AI Engineer passionate about <span class="accent"><span id="typed"></span></span></h1>
         <p>Master's student with strong foundation in AI research and 2 years of industry experience in Computer Vision, Machine Learning and Agentic AI Platforms.</p>
+        <div class="cta-row" aria-label="primary actions">
+          <a class="btn" href="#contact"><span class="sheen"></span><i class="fas fa-paper-plane" style="margin-right:8px"></i>Contact Me</a>
+          <a class="btn secondary" href="https://linkedin.com/in/caoquocnguyen" target="_blank" rel="noopener"><span class="sheen"></span><i class="fab fa-linkedin" style="margin-right:8px"></i>LinkedIn</a>
+        </div>
         
         <!-- Stats Section -->
         <div class="stats-grid">
           <div class="stat-card" data-aos="zoom-in" data-aos-delay="50">
-            <div class="stat-number" data-target="2">0</div>
+            <div class="stat-number" data-target="2">2</div>
             <div class="stat-label">Years Experience</div>
           </div>
           <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
-            <div class="stat-number" data-target="3">0</div>
+            <div class="stat-number" data-target="3">3</div>
             <div class="stat-label">AI Companies</div>
           </div>
           <div class="stat-card" data-aos="zoom-in" data-aos-delay="150">
@@ -501,12 +575,25 @@
             <div class="stat-label">Prize Winner</div>
           </div>
           <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
-            <div class="stat-number" data-target="20" data-suffix="+">0+</div>
+            <div class="stat-number" data-target="20" data-suffix="+">20+</div>
             <div class="stat-label">Technologies</div>
           </div>
         </div>
       </div>
     </header>
+
+    <!-- Wavy divider -->
+    <div class="divider" aria-hidden="true">
+      <svg width="2000" height="84" viewBox="0 0 2000 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 30C400 110 800 -40 1200 30C1600 100 1800 20 2000 60V84H0V30Z" fill="url(#g1)" opacity="0.4"/>
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="2000" y2="0" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4f46e5"/>
+            <stop offset="1" stop-color="#22d3ee"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
 
     <!-- ABOUT SECTION -->
     <section id="about" class="section container">
@@ -754,10 +841,16 @@
       <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- Custom cursor elements -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" integrity="sha512-8Jj5Fd3l1wgnuh3Nn8jFjYE6j0+ST9xg3m0WrA6H6oL0O6QeRyCwdxQJQm9GthmQWqf3npgZ0fJkqkJYpS+JrA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@3/tsparticles.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script>
       // Scroll Progress
       window.addEventListener('scroll', function() {
@@ -858,6 +951,46 @@
         });
       }, { threshold: 0.4 });
       counters.forEach(c => counterObserver.observe(c));
+
+      // Active nav highlight on scroll
+      const sections = Array.from(document.querySelectorAll('section[id]'));
+      const navLinks = Array.from(document.querySelectorAll('.links a'));
+      const setActive = () => {
+        const y = window.scrollY + 120;
+        let current = sections[0]?.id;
+        for (const s of sections) {
+          if (y >= s.offsetTop) current = s.id;
+        }
+        navLinks.forEach(a => {
+          const href = a.getAttribute('href') || '';
+          const id = href.startsWith('#') ? href.slice(1) : '';
+          a.classList.toggle('active', id === current);
+        });
+      };
+      setActive();
+      window.addEventListener('scroll', setActive);
+
+      // GSAP parallax and scroll FX
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.to('.blob.b2', { yPercent: -10, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }});
+      gsap.to('.blob.b3', { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }});
+      gsap.to('.aurora', { yPercent: -5, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }});
+      gsap.from('.section h2', { opacity: 0, y: 30, duration: 0.6, stagger: 0.2, scrollTrigger: { trigger: '.section', start: 'top 75%' }});
+
+      // Cursor glow follow
+      const cursor = document.getElementById('cursor');
+      const ring = document.getElementById('cursorRing');
+      let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+      let ringX = mouseX, ringY = mouseY;
+      const lerp = (a, b, n) => (1 - n) * a + n * b;
+      window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`; });
+      const animateRing = () => {
+        ringX = lerp(ringX, mouseX, 0.12);
+        ringY = lerp(ringY, mouseY, 0.12);
+        ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
+        requestAnimationFrame(animateRing);
+      };
+      animateRing();
 
       // Year
       document.getElementById('year').textContent = new Date().getFullYear();
