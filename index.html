@@ -499,7 +499,7 @@
       
 
       <div class="container hero-content" data-aos="fade-up" data-aos-duration="800">
-        <h1>AI Engineer passionate about <span class="accent"><span id="typed"></span></span></h1>
+  <h1><span class="accent">AI Engineer</span></h1>
         <p>Master's student with strong foundation in AI research and 2 years of industry experience in Computer Vision, Machine Learning and Agentic AI Platforms.</p>
         <div class="cta-row" aria-label="primary actions">
           <a class="btn" href="#contact"><i class="fas fa-paper-plane" style="margin-right:8px"></i>Contact Me</a>
@@ -779,7 +779,7 @@
     
 
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    
     <script>
       // Scroll Progress
       window.addEventListener('scroll', function() {
@@ -804,16 +804,7 @@
       // Init AOS (scroll animations)
       AOS.init({ once: true, offset: 80, duration: 700, easing: 'ease-out-cubic' });
 
-      // Typed.js for hero keywords
-      const typed = new Typed('#typed', {
-        strings: ['Computer Vision', 'LLMs', 'Face Recognition', 'Agentic AI'],
-        typeSpeed: 38,
-        backSpeed: 20,
-        backDelay: 1400,
-        loop: true,
-        smartBackspace: true,
-        showCursor: false,
-      });
+      // Typed.js removed: headline is now static "AI Engineer"
 
       // Nav shrink + back-to-top toggle
       const nav = document.querySelector('.nav');
