@@ -288,6 +288,8 @@
         border-radius: 1rem;
         transition: all 0.3s ease;
         border: 2px solid transparent;
+        text-decoration: none; /* if used as <a>, remove underline */
+        color: inherit;        /* inherit text color when used as <a> */
       }
       
       .contact-item:hover {
@@ -709,7 +711,7 @@
           </div>
         </div>
         
-        <div class="contact-item" data-aos="fade-up" data-aos-delay="100">
+        <a class="contact-item" data-aos="fade-up" data-aos-delay="100" href="https://github.com/imCaoQuoc/nguyencaoquoc/blob/main/CERTIFICATE_LANDING_PAGE_IBM_AI_ENGINEER.jpeg" target="_blank" rel="noopener">
           <div class="contact-icon">
             <i class="fas fa-robot"></i>
           </div>
@@ -717,9 +719,9 @@
             <h4>IBM AI Engineer</h4>
             <p>Coursera Professional Certificate</p>
           </div>
-        </div>
-        
-        <div class="contact-item" data-aos="fade-up" data-aos-delay="150">
+        </a>
+
+        <a class="contact-item" data-aos="fade-up" data-aos-delay="150" href="https://github.com/imCaoQuoc/nguyencaoquoc/blob/main/CERTIFICATE_LANDING_PAGE_IBM_DATA_SCIENCE.jpeg" target="_blank" rel="noopener">
           <div class="contact-icon">
             <i class="fas fa-chart-line"></i>
           </div>
@@ -727,7 +729,7 @@
             <h4>IBM Data Scientist</h4>
             <p>Coursera Professional Certificate</p>
           </div>
-        </div>
+        </a>
       </div>
     </section>
 
