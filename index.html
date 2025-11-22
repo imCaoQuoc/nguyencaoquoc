@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Nguyen Cao Quoc – AI Engineer</title>
-    <meta name="description" content="AI Engineer crafting high-performance AI products across agentic platforms, computer vision, and NLP. 2 years of experience and a Master’s candidate in Computer Science." />
+    <meta name="description" content="AI Engineer with expertise in Computer Vision, LLMs/VLMs, Face Recognition, and Agentic AI Platforms. Master's student with 2 years of industry experience." />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,29 +12,33 @@
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
     <style>
       :root {
-        --bg: #02030a;
-        --surface: #05070b;
-        --surface-2: #0a0d14;
-        --text: #f5f5f5;
-        --muted: rgba(255, 255, 255, 0.72);
-        --border: rgba(255, 255, 255, 0.08);
-        --accent: #9affc4;
-        --accent-soft: rgba(154, 255, 196, 0.25);
-        --accent-glow: rgba(154, 255, 196, 0.55);
-        --accent-glow-strong: rgba(154, 255, 196, 0.85);
-        --pill: #0b0f16;
+        --bg: #0b0f0c;              /* very dark greenish */
+        --surface: #0f1411;         /* dark surface with green tint */
+        --text: #e7efe9;            /* slightly softer white */
+        --muted: #a3b3a7;           /* muted gray-green */
+        --primary: #00E5A8;         /* luminous emerald */
+        --primary-2: #0aa37d;       /* darker companion */
+        --accent: #00E3FD;          /* aqua glow */
+        --glow-rgb: 0, 229, 168;    /* for consistent RGBA glows */
+        --glow2-rgb: 0, 227, 253;   /* secondary glow */
+        --accent-glow: rgba(0, 227, 253, 0.18);
+        --ring: rgba(var(--glow-rgb), 0.45);
+        --card: #101512;            /* card with green tint */
+        --success: #10b981;
+        --warning: #eab308;         /* a bit warmer */
+        --fancy-gradient: linear-gradient(135deg, #00FFA3, #00E3FD, #A7F3D0);
       }
-
+      
       * { box-sizing: border-box; }
-
-      body {
-        margin: 0;
-        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      
+      body { 
+        margin: 0; 
+        font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
         background:
-          radial-gradient(60% 45% at 50% 100%, rgba(154, 255, 196, 0.18), transparent 60%),
-          radial-gradient(40% 30% at 15% 10%, rgba(255, 180, 255, 0.18), transparent 60%),
-          linear-gradient(180deg, #02060f 0%, #01030a 100%);
-        color: var(--text);
+          radial-gradient(70% 60% at 50% 120%, rgba(var(--glow-rgb), 0.16), transparent 60%),
+          radial-gradient(60% 40% at 0% 0%, rgba(var(--glow2-rgb), 0.14), transparent 55%),
+          var(--bg);
+        color: var(--text); 
         line-height: 1.6;
         overflow-x: hidden;
         position: relative;
@@ -47,428 +51,469 @@
         background-image: radial-gradient(var(--accent-glow) 1px, transparent 1px);
         background-size: 4px 4px;
         opacity: 0.07;
+        z-index: -2;
+      }
+      
+      .container { 
+        width: min(1200px, 95vw); 
+        margin: 0 auto; 
+      }
+      
+      .nav { 
+        position: fixed; 
+        top: 0; 
+        left: 0;
+        right: 0;
+        z-index: 1000; 
+        background: rgba(11, 12, 16, 0.95); 
+        backdrop-filter: blur(20px); 
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+      .nav.scrolled {
+        background: rgba(11, 12, 16, 0.75);
+        border-bottom-color: rgba(255, 255, 255, 0.08);
+      }
+      
+      .nav-inner { 
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between; 
+        padding: 1rem 0; 
+      }
+      
+      .brand { 
+        font-weight: 800; 
+        font-size: 1.1rem;
+        background: var(--fancy-gradient);
+        background-size: 200% 200%;
+        animation: gradientShift 10s ease infinite;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      
+      .links { 
+        display: flex; 
+        gap: 2rem; 
+        list-style: none; 
+        padding: 0; 
+        margin: 0; 
+      }
+      
+      @media (max-width: 768px) {
+        .links { display: none; }
+      }
+      
+      .links a { 
+        color: var(--text); 
+        text-decoration: none; 
+        opacity: 0.8; 
+        transition: all 0.3s ease;
+        position: relative;
+        padding: 0.5rem 0;
+      }
+      
+      .links a:hover { 
+        opacity: 1; 
+        color: var(--primary);
+      }
+
+      .links a.active {
+        color: var(--primary);
+        opacity: 1;
+      }
+      
+      .links a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background: var(--primary);
+        transition: width 0.3s ease;
+      }
+      
+      .links a:hover::after {
+        width: 100%;
+      }
+      
+      .hero { 
+        padding: 8rem 0 4rem; 
+        text-align: center; 
+        position: relative;
+        background:
+          linear-gradient(180deg, rgba(9, 20, 14, 0.7) 0%, rgba(11, 15, 12, 0) 60%);
+        overflow: hidden;
+      }
+      
+      .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" fill-opacity="0.03"/><circle cx="75" cy="75" r="1" fill="%23ffffff" fill-opacity="0.03"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" fill-opacity="0.02"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        opacity: 0.25;
+        pointer-events: none;
         z-index: 0;
       }
 
-      a { color: inherit; }
-
-      .container {
-        width: min(1200px, 94vw);
-        margin: 0 auto;
+      .hero::after {
+        content: '';
+        position: absolute;
+        inset: -40%;
+        background:
+          conic-gradient(
+            from 200deg,
+            rgba(var(--glow-rgb), 0.0) 0deg,
+            rgba(var(--glow-rgb), 0.45) 60deg,
+            rgba(var(--glow2-rgb), 0.4) 120deg,
+            rgba(255, 255, 255, 0.0) 180deg,
+            rgba(var(--glow-rgb), 0.35) 240deg,
+            rgba(var(--glow2-rgb), 0.0) 320deg,
+            transparent 360deg
+          );
+        filter: blur(80px);
+        opacity: 0.9;
+        mix-blend-mode: screen;
+        animation: spinBeams 32s linear infinite;
+        z-index: 0;
       }
 
-      .nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-        background: rgba(5, 6, 10, 0.9);
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--border);
-        transition: background 0.3s ease, border-color 0.3s ease;
-      }
-      .nav.scrolled {
-        background: rgba(5, 6, 10, 0.75);
-        border-bottom-color: rgba(255, 255, 255, 0.06);
-      }
-      .nav-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1rem 0;
-      }
-      .brand {
+      .hero-content { position: relative; z-index: 1; }
+      
+      .hero h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        margin-bottom: 1rem;
         font-weight: 800;
-        font-size: 1rem;
-        letter-spacing: 0.12em;
+        line-height: 1.2;
       }
-      .links {
-        display: none;
-        gap: 1.25rem;
-        list-style: none;
-        padding: 0;
-        margin: 0;
+      
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 900px;
+        margin: 0 auto 2rem;
+        opacity: 0.9;
       }
-      .links a {
-        color: var(--text);
-        text-decoration: none;
-        opacity: 0.75;
-        font-weight: 600;
-        letter-spacing: 0.01em;
-        transition: color 0.2s ease, opacity 0.2s ease;
+      
+      .accent { 
+        background: var(--fancy-gradient); 
+        background-size: 200% 200%;
+        animation: gradientShift 12s ease infinite;
+        -webkit-background-clip: text; 
+        background-clip: text; 
+        color: transparent; 
+        font-weight: 900;
       }
-      .links a:hover,
-      .links a.active {
-        opacity: 1;
-        color: var(--accent);
+      
+      .section { 
+        padding: 4rem 0; 
       }
-      @media (max-width: 900px) {
-        .links { display: flex; flex-wrap: wrap; }
-      }
-
-      .page-shell {
-        display: grid;
-        grid-template-columns: 220px minmax(0, 1fr);
-        gap: 4rem;
-        padding-top: 5.5rem;
-        padding-bottom: 4rem;
-      }
-      .page-sidebar {
-        padding-top: 1.5rem;
-        font-size: 0.95rem;
-      }
-      .side-nav {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .side-nav a {
-        color: rgba(255, 255, 255, 0.72);
-        text-decoration: none;
-        font-weight: 600;
-        letter-spacing: 0.02em;
-        transition: color 0.2s ease;
-        position: relative;
-      }
-      .side-nav a:hover,
-      .side-nav a.active {
-        color: #ffffff;
-      }
-      .side-nav a.active::before {
-        content: '';
-        position: absolute;
-        left: -12px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 4px;
-        height: 20px;
-        border-radius: 2px;
-        background: var(--accent);
-        box-shadow: 0 0 10px var(--accent-glow);
-      }
-      @media (max-width: 900px) {
-        .page-shell { grid-template-columns: 1fr; gap: 2rem; }
-        .page-sidebar {
-          order: -1;
-          display: flex;
-          overflow-x: auto;
-          gap: 1.25rem;
-          padding-bottom: 0.5rem;
-        }
-        .side-nav { flex-direction: row; }
-      }
-
-      .profile-card {
-        position: relative;
-        margin: 0;
-        padding: 1.8rem 2rem;
-        border-radius: 18px;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75);
-        overflow: visible;
-      }
-      .profile-card::after {
-        content: '';
-        position: absolute;
-        left: 10%;
-        right: 10%;
-        bottom: -35px;
-        height: 70px;
-        background: var(--accent-glow);
-        filter: blur(32px);
-        opacity: 0.55;
-        z-index: -1;
-      }
-      .profile-card + .section {
-        margin-top: 2.5rem;
-      }
-      .profile-top {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .profile-meta {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-      .profile-meta-list {
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-      }
-      .chip {
-        padding: 0.4rem 0.8rem;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid var(--border);
-        font-weight: 600;
-        font-size: 0.9rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-      }
-      .chip.primary {
-        background: #0b0f16;
-        border-color: rgba(255, 255, 255, 0.18);
-        color: #f5f5f5;
-        font-size: 0.85rem;
-        padding: 0.5rem 0.9rem;
-      }
-      .chip-link { text-decoration: none; color: inherit; }
-
-      .profile-avatar {
-        width: 96px;
-        height: 96px;
-        border-radius: 50%;
-        background: #111;
-        border: 2px solid rgba(255, 255, 255, 0.12);
-        display: grid;
-        place-items: center;
-        overflow: hidden;
-        transition: 0.25s ease;
-      }
-      .profile-avatar img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-      .profile-avatar:hover {
-        box-shadow: 0 0 12px var(--accent-glow-strong);
-      }
-      .profile-header {
-        margin-top: 1.2rem;
-        text-align: left;
-      }
-      .profile-header h1 {
-        margin: 0.2rem 0 0.3rem;
-        font-size: 2.8rem;
-        letter-spacing: -0.5px;
-      }
-      .role-line {
-        font-weight: 500;
-        font-size: 1.05rem;
-        color: var(--muted);
-        margin-bottom: 0.8rem;
-      }
-      .profile-summary {
-        margin: 0.5rem 0 1.2rem;
-        font-size: 1.05rem;
-        color: var(--muted);
-      }
-      .profile-actions {
-        display: flex;
-        gap: 0.75rem;
-        margin-top: 0.9rem;
-      }
-      .icon-btn {
-        width: 40px;
-        height: 40px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.16);
-        background: #050709;
-        display: grid;
-        place-items: center;
-        color: rgba(255, 255, 255, 0.8);
-        text-decoration: none;
-        font-size: 0.9rem;
-        transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-      }
-      .icon-btn:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-        transform: translateY(-2px);
-      }
-
-      .section { padding: 3rem 0; }
+      
       .section h2 {
-        font-size: 2.1rem;
-        margin: 0 0 1.8rem;
-        color: var(--accent);
-        text-align: left;
-        letter-spacing: 0.03em;
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 3rem;
+        background: var(--fancy-gradient);
+        background-size: 200% 200%;
+        animation: gradientShift 12s ease infinite;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 800;
       }
-      .section h3,
-      .card h3 {
-        color: var(--accent);
+      
+      .card { 
+        background: var(--card); 
+        border: 1px solid rgba(255, 255, 255, 0.1); 
+        border-radius: 1.5rem; 
+        padding: 2rem; 
+        margin-bottom: 2rem; 
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(12px);
       }
-      .card {
-        background: var(--surface-2);
-        border: 1px solid rgba(154, 255, 196, 0.15);
-        border-radius: 16px;
-        padding: 1.75rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-        transition: 0.25s ease;
-      }
+      
       .card:hover {
-        border-color: var(--accent);
-        box-shadow:
-          0 0 12px var(--accent-soft),
-          0 0 32px var(--accent-soft);
-        transform: translateY(-3px);
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
       }
-      .card h3 { margin-top: 0; margin-bottom: 0.4rem; }
-      .card h4 { margin: 0.5rem 0; color: var(--accent); }
 
-      .cta-row {
-        display: flex;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-        justify-content: flex-start;
+      .timeline { 
+        position: relative; 
       }
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.65rem 1rem;
-        border-radius: 999px;
-        border: 1px solid rgba(154, 255, 196, 0.25);
-        background: rgba(154, 255, 196, 0.08);
-        color: #ffffff;
-        text-decoration: none;
-        font-weight: 700;
-        transition: border-color 0.2s ease, transform 0.2s ease;
+      
+      .timeline::before {
+        content: '';
+        position: absolute;
+        left: 2rem;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--primary), var(--accent));
       }
-      .btn:hover {
-        background: rgba(154, 255, 196, 0.15);
-        border-color: var(--accent);
-        box-shadow: 0 0 10px var(--accent-soft);
-        transform: translateY(-2px);
+      
+      .timeline .titem { 
+        margin-bottom: 3rem; 
+        position: relative;
+        margin-left: 4rem;
       }
-      .btn.secondary { background: #080b12; color: #ffffff; }
-
-      .timeline { display: grid; gap: 1.5rem; }
-      .timeline::before,
+      
       .timeline .titem::before {
-        display: none;
+        content: '';
+        position: absolute;
+        left: -5rem;
+        top: 1rem;
+        width: 12px;
+        height: 12px;
+        background: var(--primary);
+        border-radius: 50%;
+        border: 3px solid var(--bg);
+        box-shadow: 0 0 0 3px var(--primary);
       }
-      .timeline .titem { margin: 0; }
-      #experience .card h3 {
-        font-size: 1rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: #ffffff;
+      
+      .pillset { 
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 0.8rem; 
+        margin-top: 1rem;
       }
-      #experience .card h4 {
-        color: var(--accent);
-        font-size: 0.95rem;
-        margin-top: 0.3rem;
-      }
-
-      .pillset { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
-      .pill {
-        padding: 0.55rem 0.95rem;
-        border-radius: 20px;
-        border: 1px solid var(--border);
-        background: rgba(255, 255, 255, 0.04);
-        color: #f5f5f5;
-        font-size: 0.9rem;
+      
+      .pill { 
+        padding: 0.6rem 1rem; 
+        border-radius: 25px; 
+        border: 2px solid transparent;
+        background: linear-gradient(135deg, var(--primary), var(--accent)) padding-box,
+                    linear-gradient(135deg, var(--primary), var(--accent)) border-box;
+        color: #0c1310;
+        font-size: 0.9rem; 
         font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer;
       }
-
+      
+      .pill:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(var(--glow-rgb), 0.35);
+        color: #0c1310;
+      }
+      
       .contact-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 1.5rem;
-        margin-top: 1.5rem;
+        margin-top: 2rem;
       }
+      
       .contact-item {
         display: flex;
         align-items: center;
         gap: 1rem;
-        padding: 1.3rem;
+        padding: 1.5rem;
         background: var(--surface);
-        border-radius: 14px;
-        border: 1px solid var(--border);
-        text-decoration: none;
-        color: inherit;
-        transition: border-color 0.2s ease, transform 0.2s ease;
+        border-radius: 1rem;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        text-decoration: none; /* if used as <a>, remove underline */
+        color: inherit;        /* inherit text color when used as <a> */
       }
+      
       .contact-item:hover {
-        border-color: var(--accent);
+        border-color: var(--primary);
         transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(var(--glow-rgb), 0.2);
       }
-      .contact-item h4 {
-        margin: 0 0 0.25rem;
-        color: var(--accent);
-      }
-      .contact-item p { margin: 0; color: #ffffff; }
-      .contact-item a {
-        color: #ffffff;
-        text-decoration: none;
-        font-weight: 700;
-      }
-      .contact-item a:hover { text-decoration: underline; }
+      
       .contact-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
-        background: #0c1018;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #ffffff;
-        font-size: 1.1rem;
-        border: 1px solid var(--border);
+        color: white;
+        font-size: 1.2rem;
       }
-
-      .portfolio-grid {
+      
+      .stats-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 1.2rem;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
       }
-      .portfolio-card {
-        background: var(--surface-2);
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        padding: 1.4rem;
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-      }
-      .portfolio-card h4 {
-        margin: 0 0 0.35rem 0;
-        color: #ffffff;
-      }
-      .pillset-mini {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-        margin-top: 0.6rem;
-      }
-      .pill-mini {
-        padding: 0.35rem 0.65rem;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid var(--border);
-        font-size: 0.8rem;
-      }
-
-      .footer {
-        border-top: 1px solid var(--border);
+      
+      .stat-card {
         text-align: center;
-        padding: 2rem 0;
-        background: #05070b;
-        margin-top: 2rem;
+        padding: 2rem;
+        background: var(--card);
+        border-radius: 1rem;
+        border: 2px solid transparent;
+        background-clip: padding-box;
+        position: relative;
+      }
+      
+      .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 1rem;
+        padding: 2px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        -webkit-mask-composite: xor;
       }
 
-      @media (max-width: 600px) {
-        .profile-card { padding: 1.4rem; }
-        .profile-header h1 { font-size: 2.2rem; }
-        .profile-top { flex-direction: column; align-items: flex-start; }
-        .profile-actions { flex-wrap: wrap; }
+      /* CTA buttons - fancy shimmer */
+      .cta-row { display: flex; gap: 0.8rem; justify-content: center; margin-top: 1.1rem; flex-wrap: wrap; }
+      .btn {
+        padding: 0.75rem 1.1rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: var(--fancy-gradient);
+        background-size: 200% 200%;
+        animation: gradientShift 10s ease infinite;
+        color: #0c1310; text-decoration: none; font-weight: 700;
+        box-shadow: 0 6px 18px rgba(var(--glow-rgb),0.18);
+        transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(var(--glow-rgb),0.22); }
+      .btn::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -30%;
+        width: 30%;
+        height: 200%;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.28), transparent);
+        transform: skewX(-20deg) translateX(-150%);
+        transition: transform 0.6s ease;
+        pointer-events: none;
+      }
+      .btn:hover::after { transform: skewX(-20deg) translateX(450%); }
+      .btn.secondary { background: linear-gradient(135deg, rgba(19,24,21,0.85), rgba(23,30,26,0.85)); color: var(--text); }
+
+      
+      
+      .stat-number {
+        font-size: 3rem;
+        font-weight: 800;
+        background: var(--fancy-gradient);
+        background-size: 200% 200%;
+        animation: gradientShift 14s ease infinite;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1;
+      }
+      
+      .stat-label {
+        margin-top: 0.5rem;
+        opacity: 0.8;
+        font-weight: 600;
+      }
+      
+      .footer { 
+        border-top: 1px solid rgba(255, 255, 255, 0.1); 
+        text-align: center; 
+        padding: 2rem 0; 
+        background: var(--surface);
+      }
+
+      /* Back to top button */
+  .back-to-top {
+        position: fixed;
+        right: 1.25rem;
+        bottom: 1.25rem;
+        width: 46px; height: 46px;
+        border-radius: 50%;
+        border: 1px solid rgba(255,255,255,0.15);
+  background: var(--fancy-gradient);
+  background-size: 200% 200%;
+  animation: gradientShift 12s ease infinite;
+  color: #0c1310;
+        display: grid; place-items: center;
+  box-shadow: 0 10px 25px rgba(var(--glow-rgb),0.25);
+        cursor: pointer;
+        opacity: 0; visibility: hidden; transform: translateY(10px);
+        transition: all 0.3s ease;
+        z-index: 1100;
+      }
+      .back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+      
+      .scroll-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        z-index: 1001;
+      }
+      
+      .scroll-progress {
+        height: 100%;
+        background: var(--fancy-gradient);
+        background-size: 200% 200%;
+        animation: gradientShift 18s linear infinite;
+        width: 0%;
+        transition: width 0.1s ease;
+      }
+      @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+      }
+      
+      .animate-on-scroll.animated {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      @media (max-width: 768px) {
+        .hero { padding: 6rem 0 3rem; }
+        .hero h1 { font-size: 2.5rem; }
+        .section { padding: 3rem 0; }
+        .timeline .titem { margin-left: 2rem; }
+        .timeline::before { left: 1rem; }
+        .timeline .titem::before { left: -3rem; }
+      }
+
+      @keyframes spinBeams {
+        0%   { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
       }
     </style>
   </head>
   <body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-progress" id="scrollProgress"></div>
+    </div>
+
     <nav class="nav">
       <div class="container nav-inner">
         <div class="brand">NGUYEN CAO QUOC</div>
@@ -476,8 +521,7 @@
           <li><a href="#about">About</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#publications">Publications</a></li>
-          <li><a href="#achievements">Honors & Awards</a></li>
-          <li><a href="#certificates">Achievements & Certifications</a></li>
+          <li><a href="#achievements">Awards</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#education">Education</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -485,301 +529,316 @@
       </div>
     </nav>
 
-    <main class="page-shell container">
-      <aside class="page-sidebar">
-        <ul class="side-nav">
-          <li><a href="#about">Introduction</a></li>
-          <li><a href="#experience">Work Experience</a></li>
-          <li><a href="#publications">Publications</a></li>
-          <li><a href="#achievements">Honors & Awards</a></li>
-          <li><a href="#skills">Technical skills</a></li>
-          <li><a href="#education">Studies</a></li>
-          <li><a href="#certificates">Achievements & Certifications</a></li>
-          <li><a href="#contact">Contacts</a></li>
+    <header class="hero">
+      <!-- FX layers -->
+
+      <div class="container hero-content" data-aos="fade-up" data-aos-duration="800">
+  <h1><span class="accent">AI Engineer</span></h1>
+        <p>AI engineer focused on reliable, high-performance products. 2 years shipping native AI apps across CV/NLP, agents, and prompt/schema design with strong concurrency and optimization skills. Master’s candidate with a sharp eye for evaluating and improving AI solutions.</p>
+        <div class="cta-row" aria-label="primary actions">
+          <a class="btn" href="#contact"><i class="fas fa-paper-plane" style="margin-right:8px"></i>Contact Me</a>
+          <a class="btn secondary" href="https://linkedin.com/in/caoquocnguyen" target="_blank" rel="noopener"><i class="fab fa-linkedin" style="margin-right:8px"></i>LinkedIn</a>
+        </div>
+        
+        <!-- Stats Section -->
+        <div class="stats-grid">
+          <div class="stat-card" data-aos="zoom-in" data-aos-delay="50">
+            <div class="stat-number">1</div>
+            <div class="stat-label">Publication Paper</div>
+          </div>
+          <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+            <div class="stat-number">2</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-card" data-aos="zoom-in" data-aos-delay="150">
+            <div class="stat-number">3</div>
+            <div class="stat-label">AI Companies</div>
+          </div>
+          <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+            <div class="stat-number" data-target="20" data-suffix="+">20+</div>
+            <div class="stat-label">Technologies</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section container">
+      <h2 data-aos="fade-up">About Me</h2>
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <p style="font-size: 1.1rem; line-height: 1.8;">
+          I am an AI Engineer with a strong foundation in IT and a passion for AI and data. Currently pursuing a Master's degree with a focus on researching Computer Vision and LLMs/VLMs. I have worked in AI research/industry for 2 years with a wide range of real-world problems and industry applications. I am eager to learn more, dig deeper into AI, and love to resolve challenging practical problems.
+        </p>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section container">
+      <h2 data-aos="fade-up">Professional Experience</h2>
+      <div class="timeline">
+        <div class="titem card" data-aos="fade-up" data-aos-delay="50">
+          <h3><i class="fas fa-briefcase" style="color: var(--primary); margin-right: 0.5rem;"></i>AI Engineer — TMA Solutions</h3>
+          <p><em><i class="fas fa-calendar-alt" style="color: var(--accent); margin-right: 0.5rem;"></i>Jan 2025 – Present</em></p>
+          
+          <h4 style="color: var(--primary); margin-top: 1.5rem;">🤖 TMA Agentic Platform</h4>
+          <ul>
+            <li>Designed and implemented AI agents for healthcare and marketing, delivering domain-specific intelligence that adapts to industry needs</li>
+            <li>Developed a dynamic language module enabling adaptive, context-aware agent behavior across diverse use cases</li>
+            <li>Engineered intelligent workflows for hospital ophthalmology use cases to enhance process automation and clinical decision support</li>
+            <li>Documented research findings and proposed improvements to boost platform scalability and reliability</li>
+          </ul>
+
+          <h4 style="color: var(--primary); margin-top: 1.5rem;">📑 Clinic Contracts Extraction & Invoice Matching</h4>
+          <ul>
+            <li>Built foundational architecture for AI services powering contract extraction and invoice matching</li>
+            <li>Owned the Contract Extraction Agent to keep output format consistent and optimized for vector database embeddings</li>
+            <li>Owned the Invoice Validation Agent to ensure correctness and completeness before the invoice-matching step</li>
+            <li>Implemented concurrent AI agent service flows, improving execution speed by 50%</li>
+            <li>Designed and refined prompt instructions, using <strong>Pydantic</strong> to enforce strict JSON outputs and leveraging TOON format to cut token usage</li>
+            <li>Collaborated with the tech lead on invoice–contract matching logic, improving correctness accuracy by 40%</li>
+          </ul>
+
+          <h4 style="color: var(--primary); margin-top: 1.5rem;">💼 CRM/ERP Platform</h4>
+          <ul>
+            <li>Developed and optimized the lead scoring module with <strong>HubSpot API</strong> integration for accurate opportunity prioritization</li>
+            <li>Built AI-powered tools for automated quotations using <strong>FastMCP</strong>, reducing manual effort and accelerating response times</li>
+            <li>Fine-tuned LLM prompts for product-quantity matching from natural language input, increasing usability and reducing errors</li>
+            <li>Researched and deployed a recommendation system based on collaborative filtering to deliver personalized product suggestions</li>
+            <li>Delivered insights and system enhancements to streamline sales processes and strengthen decision-making</li>
+          </ul>
+        </div>
+
+        <div class="titem card" data-aos="fade-up" data-aos-delay="100">
+          <h3><i class="fas fa-flask" style="color: var(--primary); margin-right: 0.5rem;"></i>AI Engineer Intern — VinAI Research</h3>
+          <p><em><i class="fas fa-calendar-alt" style="color: var(--accent); margin-right: 0.5rem;"></i>Sep 2024 – Jan 2025</em></p>
+          
+          <h4 style="color: var(--primary); margin-top: 1.5rem;">👤 Face Recognition System</h4>
+          <ul>
+            <li>Researched and integrated ArcFace Loss into deep learning models to improve face identification performance</li>
+            <li>Evaluated models using TAR@FAR metrics and accuracy on IJBB/IJBC, benchmarking against baselines</li>
+            <li>Documented implementations, experiments, and proposed enhancements for continuous improvement</li>
+            <li>Analyzed Cosine Scheduler impact on learning rate adjustment and model convergence</li>
+            <li>Integrated the scheduler into training pipelines and reported gains in accuracy and efficiency</li>
+            <li>Developed interactive demos with <strong>FastAPI</strong> to showcase solution capabilities</li>
+            <li>Created visualizations and presentations for both technical and non-technical audiences</li>
+            <li>Gathered feedback and iteratively improved demo quality</li>
+          </ul>
+        </div>
+
+        <div class="titem card" data-aos="fade-up" data-aos-delay="150">
+          <h3><i class="fas fa-eye" style="color: var(--primary); margin-right: 0.5rem;"></i>AI Engineer — VietVang Consulting & Solutions JSC</h3>
+          <p><em><i class="fas fa-calendar-alt" style="color: var(--accent); margin-right: 0.5rem;"></i>Jan 2024 – Sep 2024</em></p>
+          
+          <h4 style="color: var(--primary); margin-top: 1.5rem;">📦 Stock Keeping Unit Detection and Counting System</h4>
+          <ul>
+            <li>Created and labeled image datasets with advanced tools to ensure reliable training data for SKU detection and counting</li>
+            <li>Tailored data processing to meet customer and model requirements, improving compatibility and training efficiency</li>
+            <li>Created and refined SKU evaluation criteria to standardize quality checks for consistent model assessment</li>
+            <li>Researched YOLOv10 architecture and compiled detailed documentation as a technical reference for the project team</li>
+            <li>Fine-tuned models on custom datasets and evaluated precision/recall, raising accuracy on real-world data</li>
+            <li>Further refined models to deliver better detection results for customers</li>
+            <li>Diagnosed, researched solutions, and resolved customer issues in collaboration with customers, PM, and CEO</li>
+            <li>Implemented solutions that enhanced customer satisfaction</li>
+            <li>Developed interactive demos to showcase YOLOv10 capabilities and communicate technical value in business contexts</li>
+            <li>Designed and implemented APIs to support development teams building customer-facing applications</li>
+            <li>Developed comprehensive documentation and interactive API specs, plus guidance to internal teams to accelerate deployment</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications" class="section container">
+      <h2 data-aos="fade-up">Publications</h2>
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <h3><i class="fas fa-book" style="color: var(--primary); margin-right: 0.5rem;"></i>Leveraging Large Language Models as Faithful Explainers for Text Classification</h3>
+        <p><em>EIDT 2025 – Co-authored with Le Xuan Tung | Equal contribution</em></p>
+        <p>
+          Developed a prompt-based, model-agnostic framework that turns GPT-3.5/4o into post-hoc explainers for BERT classifiers on 20 Newsgroups and IMDB benchmarks. The system ranks influential tokens and generates natural-language rationales, improving trust and debugging for high-stakes NLP workloads.
+        </p>
+        <h4 style="color: var(--primary); margin-top: 1.5rem;">Key Contributions</h4>
+        <ul>
+          <li>Designed persona- and chain-of-thought-driven prompts that force LLMs to output top-k salient words plus faithful rationales.</li>
+          <li>Ran faithfulness studies by deleting LLM-identified tokens to measure probability drops, benchmarking against LIME and SHAP.</li>
+          <li>Showed GPT-4o rivaled or surpassed SHAP at higher k while providing human-readable narratives for classifier behavior.</li>
         </ul>
-      </aside>
+        <h4 style="color: var(--primary); margin-top: 1.5rem;">Impact</h4>
+        <ul>
+          <li>20 Newsgroups accuracy: 75.08% (BERT) with GPT-4o explanations matching SHAP fidelity at k ≥ 7.</li>
+          <li>IMDB sentiment accuracy: 92.89%, where GPT-4o explanations consistently outperformed LIME and SHAP for k &gt; 1.</li>
+          <li>Earned EIDT recognition and certification for advancing transparent NLP workflows.</li>
+        </ul>
+        <div class="cta-row" style="justify-content: flex-start;">
+          <a class="btn" href="https://github.com/imCaoQuoc/nguyencaoquoc/blob/main/personal/EDIT___LLMXplainer_for_TextClass.pdf" target="_blank" rel="noopener">Read Paper</a>
+          <a class="btn secondary" href="https://github.com/imCaoQuoc/nguyencaoquoc/blob/main/certs/EIDT-Cert-30.pdf" target="_blank" rel="noopener">View Certificate</a>
+        </div>
+      </div>
+    </section>
 
-      <section class="page-main">
-        <section id="about" class="profile-card" data-aos="fade-up" data-aos-duration="800">
-          <div class="profile-top">
-            <div class="profile-meta">
-              <div class="profile-avatar">
-                <img src="me.jpg" alt="Portrait of Nguyen Cao Quoc" />
-              </div>
-              <div class="profile-meta-list">
-                <span class="chip">Ho Chi Minh city</span>
-                <span class="chip">English</span>
-                <span class="chip">Vietnamese</span>
-              </div>
-            </div>
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="section container">
+      <h2 data-aos="fade-up">Honors & Awards</h2>
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <h3><i class="fas fa-trophy" style="color: var(--warning); margin-right: 0.5rem;"></i>SOICT Hackathon 2024 – First Prize</h3>
+        <p><em><i class="fas fa-calendar-alt" style="color: var(--accent); margin-right: 0.5rem;"></i>Nov 2024 – Jan 2025</em></p>
+        <h4 style="color: var(--primary);">🤖 Chatbot for Administrative Documents</h4>
+        <ul>
+          <li>Utilized <strong>Python</strong> and <strong>Llama-Cloud's API</strong> to process raw data into required format</li>
+          <li>Leveraged <strong>Llama-Index's API</strong> to convert data into markdown format with proper naming conventions</li>
+          <li>Handled table data within files ensuring critical content preservation during processing</li>
+          <li>Employed <strong>OpenAI's API</strong> to develop FAQ generation system related to file content</li>
+          <li>Conducted quality checks and fine-tuning to ensure accuracy and relevance of generated content</li>
+          <li>Collaborated with team members to design, build, and test seamless chatbot interactions</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section container">
+      <h2 data-aos="fade-up">Technical Skills</h2>
+      <div class="card" data-aos="fade-up" data-aos-delay="50">
+        <h3><i class="fas fa-brain" style="color: var(--primary); margin-right: 0.5rem;"></i>AI & Machine Learning</h3>
+        <div class="pillset">
+          <span class="pill">Artificial Intelligence</span>
+          <span class="pill">Machine Learning</span>
+          <span class="pill">Deep Learning</span>
+          <span class="pill">Computer Vision</span>
+          <span class="pill">NLP</span>
+          <span class="pill">Retrieval-Augmented Generation</span>
+        </div>
+      </div>
+
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <h3><i class="fas fa-tools" style="color: var(--primary); margin-right: 0.5rem;"></i>Frameworks & Libraries</h3>
+        <div class="pillset">
+          <span class="pill">LangChain</span>
+          <span class="pill">LangGraph</span>
+          <span class="pill">FastMCP</span>
+          <span class="pill">PydanticAI</span>
+          <span class="pill">Agno</span>
+          <span class="pill">PyTorch</span>
+          <span class="pill">TensorFlow</span>
+          <span class="pill">Llama-index</span>
+          <span class="pill">FastAPI</span>
+        </div>
+      </div>
+
+      <div class="card" data-aos="fade-up" data-aos-delay="150">
+        <h3><i class="fas fa-code" style="color: var(--primary); margin-right: 0.5rem;"></i>Programming & Data</h3>
+        <div class="pillset">
+          <span class="pill">Python</span>
+          <span class="pill">C++</span>
+          <span class="pill">SQL</span>
+          <span class="pill">Pandas</span>
+          <span class="pill">Numpy</span>
+          <span class="pill">Selenium</span>
+        </div>
+      </div>
+
+      <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <h3><i class="fas fa-heart" style="color: var(--primary); margin-right: 0.5rem;"></i>Soft Skills</h3>
+        <div class="pillset">
+          <span class="pill">Adaptable</span>
+          <span class="pill">Proactive</span>
+          <span class="pill">Quick Learning</span>
+          <span class="pill">Problem Solving</span>
+          <span class="pill">Pressure Handling</span>
+          <span class="pill">Hard-working</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="section container">
+      <h2 data-aos="fade-up">Education</h2>
+      <div class="card" data-aos="fade-up" data-aos-delay="50">
+        <h3><i class="fas fa-graduation-cap" style="color: var(--primary); margin-right: 0.5rem;"></i>Master of Computer Science</h3>
+        <p><strong>University of Information Technology, Vietnam National University, HCMC</strong></p>
+        <p><em><i class="fas fa-calendar-alt" style="color: var(--accent); margin-right: 0.5rem;"></i>2024 – Present</em></p>
+        <p>Focus: Computer Vision and Large Language Models/Vision Language Models</p>
+      </div>
+      
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <h3><i class="fas fa-university" style="color: var(--primary); margin-right: 0.5rem;"></i>Bachelor of Computer Science</h3>
+        <p><strong>University of Information Technology, Vietnam National University, HCMC</strong></p>
+        <p><em><i class="fas fa-calendar-alt" style="color: var(--accent); margin-right: 0.5rem;"></i>2020 – 2024</em></p>
+        <p><strong>GPA: 7.27/10</strong></p>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certificates" class="section container">
+      <h2 data-aos="fade-up">Achievements & Certifications</h2>
+      <div class="contact-grid">
+        <a class="contact-item" data-aos="fade-up" data-aos-delay="50" href="https://github.com/imCaoQuoc/nguyencaoquoc/blob/main/personal/NGUYEN%20CAO%20QUOC_IELTS%20REPORT.pdf" target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <i class="fas fa-language"></i>
           </div>
-          <div class="profile-header">
-            <h1>Nguyen Cao Quoc</h1>
-            <div class="role-line">AI Engineer</div>
-            <p class="profile-summary">AI engineer focused on reliable, high-performance products. 2 years shipping native AI apps across CV/NLP, agents, and prompt/schema design with strong concurrency and optimization skills. Master’s candidate with a sharp eye for evaluating and improving AI solutions.</p>
-            <div class="profile-actions" aria-label="primary actions">
-              <a class="icon-btn" href="https://github.com/imCaoQuoc" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-              <a class="icon-btn" href="https://linkedin.com/in/caoquocnguyen" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
-              <a class="icon-btn" href="mailto:caoquoc.job@gmail.com"><i class="fas fa-envelope"></i></a>
-            </div>
+          <div>
+            <h4>IELTS 6.0</h4>
+            <p>English Certification</p>
           </div>
-        </section>
-
-        <section id="experience" class="section">
-          <h2 data-aos="fade-up">Professional Experience</h2>
-          <div class="timeline">
-            <article class="titem card" data-aos="fade-up" data-aos-delay="50">
-              <h3>AI Engineer — TMA Solutions</h3>
-              <p><em>Jan 2025 – Present</em></p>
-
-              <h4>TMA Agentic Platform</h4>
-              <ul>
-                <li>Designed and implemented AI agents tailored for healthcare and marketing applications to deliver domain-specific intelligent solutions.</li>
-                <li>Developed a dynamic language module enabling adaptive, context-aware agent behavior across diverse use cases.</li>
-                <li>Engineered intelligent workflows for hospital ophthalmology use cases to enhance automation and clinical decision support.</li>
-                <li>Documented research findings and proposed improvements to strengthen platform scalability and reliability.</li>
-              </ul>
-
-              <h4>Clinic Contracts Extraction & Invoice Matching</h4>
-              <ul>
-                <li>Built the foundational architecture of the AI services powering contract and invoice processing.</li>
-                <li>Owned the Contract Extraction Agent, keeping outputs consistent and optimized for vector database embeddings.</li>
-                <li>Owned the Invoice Validation Agent, ensuring correctness and completeness before invoice matching.</li>
-                <li>Implemented concurrent AI agent service flows, improving execution speed by 50%.</li>
-                <li>Designed and refined prompt instructions; enforced strict JSON outputs with <strong>Pydantic</strong> and leveraged <strong>TOON</strong> format to reduce token usage.</li>
-                <li>Worked with the tech lead on invoice–contract matching logic, improving overall correctness accuracy by 40%.</li>
-              </ul>
-
-              <h4>CRM/ERP Platform</h4>
-              <ul>
-                <li>Developed and optimized the lead scoring module using AI models integrated with the <strong>HubSpot API</strong> for better prioritization.</li>
-                <li>Built AI-powered tools for automated quotations with <strong>FastMCP</strong>, reducing manual effort and speeding responses.</li>
-                <li>Fine-tuned LLM prompts for product-quantity matching from natural language input to minimize errors.</li>
-                <li>Researched and deployed a <strong>Collaborative Filtering</strong> recommendation system for personalized product suggestions.</li>
-                <li>Delivered insights and system enhancements to streamline sales processes and strengthen decision-making.</li>
-              </ul>
-            </article>
-
-            <article class="titem card" data-aos="fade-up" data-aos-delay="100">
-              <h3>AI Engineer Intern — VinAI Research</h3>
-              <p><em>Sep 2024 – Jan 2025</em></p>
-
-              <h4>Face Recognition System</h4>
-              <ul>
-                <li>Researched and integrated <strong>ArcFace Loss</strong> into deep learning models to improve face identification performance.</li>
-                <li>Evaluated models using TAR@FAR metrics and accuracy on IJBB/IJBC benchmarks, comparing against baselines.</li>
-                <li>Documented implementation details, experiments, and proposed enhancements.</li>
-                <li>Analyzed the <strong>Cosine Scheduler</strong>’s impact on learning rate and convergence; integrated it into training pipelines with detailed reports on accuracy and efficiency gains.</li>
-                <li>Built interactive demos with <strong>FastAPI</strong> to showcase solution capabilities.</li>
-                <li>Created visualizations and presentations for both technical and non-technical audiences.</li>
-                <li>Collected feedback and iteratively improved demo quality.</li>
-              </ul>
-            </article>
-
-            <article class="titem card" data-aos="fade-up" data-aos-delay="150">
-              <h3>AI Engineer — VietVang Consulting & Solutions JSC</h3>
-              <p><em>Jan 2024 – Sep 2024</em></p>
-
-              <h4>Stock Keeping Unit Detection & Counting</h4>
-              <ul>
-                <li>Created and labeled image datasets for SKU detection using advanced tooling to ensure quality training data.</li>
-                <li>Researched <strong>YOLOv10</strong> architecture and compiled detailed technical documentation for the team.</li>
-                <li>Fine-tuned models on custom datasets, improving accuracy on real-world retail imagery.</li>
-                <li>Collaborated with PM/CEO to diagnose and resolve customer issues in production environments.</li>
-                <li>Built APIs and documentation to support downstream development teams and integrations.</li>
-              </ul>
-            </article>
+        </a>
+        
+        <a class="contact-item" data-aos="fade-up" data-aos-delay="100" href="https://github.com/imCaoQuoc/nguyencaoquoc/blob/main/certs/CERTIFICATE_LANDING_PAGE_IBM_AI_ENGINEER.jpeg" target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <i class="fas fa-robot"></i>
           </div>
-        </section>
-
-        <section id="publications" class="section">
-          <h2 data-aos="fade-up">Publications</h2>
-          <div class="card" data-aos="fade-up" data-aos-delay="100">
-            <h3>Leveraging Large Language Models as Faithful Explainers for Text Classification</h3>
-            <p><em>EIDT 2025 – Co-authored with Le Xuan Tung | Equal contribution</em></p>
-            <p>
-              Developed a prompt-based, model-agnostic framework that turns GPT-3.5/4o into post-hoc explainers for BERT classifiers on 20 Newsgroups and IMDB benchmarks. The system ranks influential tokens and generates natural-language rationales, improving trust and debugging for high-stakes NLP workloads.
-            </p>
-            <h4>Key Contributions</h4>
-            <ul>
-              <li>Designed persona- and chain-of-thought-driven prompts that force LLMs to output top-k salient words plus faithful rationales.</li>
-              <li>Ran faithfulness studies by deleting LLM-identified tokens to measure probability drops, benchmarking against LIME and SHAP.</li>
-              <li>Showed GPT-4o rivaled or surpassed SHAP at higher k while providing human-readable narratives for classifier behavior.</li>
-            </ul>
-            <h4>Impact</h4>
-            <ul>
-              <li>20 Newsgroups accuracy: 75.08% (BERT) with GPT-4o explanations matching SHAP fidelity at k ≥ 7.</li>
-              <li>IMDB sentiment accuracy: 92.89%, where GPT-4o explanations consistently outperformed LIME and SHAP for k &gt; 1.</li>
-              <li>Earned EIDT recognition and certification for advancing transparent NLP workflows.</li>
-            </ul>
-            <div class="cta-row">
-              <a class="btn" href="https://github.com/imCaoQuoc/nguyencaoquoc/blob/main/EDIT___LLMXplainer_for_TextClass.pdf" target="_blank" rel="noopener">Read Paper</a>
-              <a class="btn secondary" href="https://github.com/imCaoQuoc/nguyencaoquoc/blob/main/EIDT-Cert-30.pdf" target="_blank" rel="noopener">View Certificate</a>
-            </div>
+          <div>
+            <h4>IBM AI Engineer</h4>
+            <p>Coursera Professional Certificate</p>
           </div>
-        </section>
+        </a>
 
-        <section id="achievements" class="section">
-          <h2 data-aos="fade-up">Honors & Awards</h2>
-          <div class="card" data-aos="fade-up" data-aos-delay="100">
-            <h3>SOICT Hackathon 2024 – First Prize</h3>
-            <p><em>Nov 2024 – Jan 2025</em></p>
-            <h4>Chatbot for Administrative Documents</h4>
-            <ul>
-              <li>Utilized <strong>Python</strong> and <strong>Llama-Cloud's API</strong> to process raw data into required format.</li>
-              <li>Leveraged <strong>Llama-Index's API</strong> to convert data into markdown format with proper naming conventions.</li>
-              <li>Handled table data within files ensuring critical content preservation during processing.</li>
-              <li>Employed <strong>OpenAI's API</strong> to develop FAQ generation system related to file content.</li>
-              <li>Conducted quality checks and fine-tuning to ensure accuracy and relevance of generated content.</li>
-              <li>Collaborated with team members to design, build, and test seamless chatbot interactions.</li>
-            </ul>
+        <a class="contact-item" data-aos="fade-up" data-aos-delay="150" href="https://github.com/imCaoQuoc/nguyencaoquoc/blob/main/certs/CERTIFICATE_LANDING_PAGE_IBM_DATA_SCIENCE.jpeg" target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <i class="fas fa-chart-line"></i>
           </div>
-        </section>
-
-        <section id="skills" class="section">
-          <h2 data-aos="fade-up">Technical Skills</h2>
-          <div class="card" data-aos="fade-up" data-aos-delay="50">
-            <h3>Core Skills</h3>
-            <div class="pillset">
-              <span class="pill">Deep Learning</span>
-              <span class="pill">Machine Learning</span>
-              <span class="pill">Generative AI</span>
-              <span class="pill">Retrieval-Augmented Generation</span>
-              <span class="pill">Computer Vision</span>
-              <span class="pill">Natural Language Processing</span>
-            </div>
+          <div>
+            <h4>IBM Data Scientist</h4>
+            <p>Coursera Professional Certificate</p>
           </div>
+        </a>
+      </div>
+    </section>
 
-          <div class="card" data-aos="fade-up" data-aos-delay="100">
-            <h3>Frameworks & Libraries</h3>
-            <div class="pillset">
-              <span class="pill">PyTorch</span>
-              <span class="pill">TensorFlow</span>
-              <span class="pill">LangChain</span>
-              <span class="pill">LangGraph</span>
-              <span class="pill">LlamaIndex</span>
-              <span class="pill">PydanticAI</span>
-              <span class="pill">Agno</span>
-              <span class="pill">Model Context Protocol</span>
-              <span class="pill">FastAPI</span>
-              <span class="pill">FastMCP</span>
-            </div>
+    <!-- CONTACT -->
+    <section id="contact" class="section container">
+      <h2 data-aos="fade-up">Let's Connect</h2>
+      <div class="contact-grid">
+        <div class="contact-item" data-aos="fade-up" data-aos-delay="50">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
           </div>
-
-          <div class="card" data-aos="fade-up" data-aos-delay="150">
-            <h3>Data & Infrastructure</h3>
-            <div class="pillset">
-              <span class="pill">Python</span>
-              <span class="pill">Milvus</span>
-              <span class="pill">Weaviate</span>
-              <span class="pill">LightRAG</span>
-              <span class="pill">FAISS</span>
-              <span class="pill">PostgreSQL</span>
-              <span class="pill">MongoDB</span>
-            </div>
+          <div>
+            <h4>Email</h4>
+            <a href="mailto:caoquoc.job@gmail.com" style="color: var(--primary); text-decoration: none;">caoquoc.job@gmail.com</a>
           </div>
-
-          <div class="card" data-aos="fade-up" data-aos-delay="200">
-            <h3>Engineering Focus</h3>
-            <div class="pillset">
-              <span class="pill">Concurrency Programming</span>
-              <span class="pill">Performance Optimization</span>
-              <span class="pill">Prompt & Schema Design</span>
-              <span class="pill">Evaluation & Reporting</span>
-              <span class="pill">Demo Development</span>
-              <span class="pill">Stakeholder Communication</span>
-            </div>
+        </div>
+        
+        <div class="contact-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="contact-icon">
+            <i class="fas fa-phone"></i>
           </div>
-        </section>
-
-        <section id="education" class="section">
-          <h2 data-aos="fade-up">Education</h2>
-          <div class="card" data-aos="fade-up" data-aos-delay="50">
-            <h3>Master of Computer Science</h3>
-            <p><strong>University of Information Technology, Vietnam National University, HCMC</strong></p>
-            <p><em>2024 – Present</em></p>
-            <p>Focus: Computer Vision and Large Language Models/Vision Language Models.</p>
+          <div>
+            <h4>Phone</h4>
+            <a href="tel:+84929791239" style="color: var(--primary); text-decoration: none;">+84 929 791 239</a>
           </div>
-
-          <div class="card" data-aos="fade-up" data-aos-delay="100">
-            <h3>Bachelor of Computer Science</h3>
-            <p><strong>University of Information Technology, Vietnam National University, HCMC</strong></p>
-            <p><em>2020 – 2024</em></p>
-            <p><strong>GPA: 7.27/10</strong></p>
+        </div>
+        
+        <div class="contact-item" data-aos="fade-up" data-aos-delay="150">
+          <div class="contact-icon">
+            <i class="fab fa-linkedin"></i>
           </div>
-        </section>
-
-        <section id="certificates" class="section">
-          <h2 data-aos="fade-up">Achievements & Certifications</h2>
-          <div class="contact-grid">
-            <a class="contact-item" data-aos="fade-up" data-aos-delay="50" href="https://github.com/imCaoQuoc/nguyencaoquoc/blob/main/NGUYEN%20CAO%20QUOC_IELTS%20REPORT.pdf" target="_blank" rel="noopener">
-              <div class="contact-icon">
-                <i class="fas fa-language"></i>
-              </div>
-              <div>
-                <h4>IELTS 6.0</h4>
-                <p>English Certification</p>
-              </div>
-            </a>
-
-            <a class="contact-item" data-aos="fade-up" data-aos-delay="100" href="https://github.com/imCaoQuoc/nguyencaoquoc/blob/main/CERTIFICATE_LANDING_PAGE_IBM_AI_ENGINEER.jpeg" target="_blank" rel="noopener">
-              <div class="contact-icon">
-                <i class="fas fa-robot"></i>
-              </div>
-              <div>
-                <h4>IBM AI Engineer</h4>
-                <p>Coursera Professional Certificate</p>
-              </div>
-            </a>
-
-            <a class="contact-item" data-aos="fade-up" data-aos-delay="150" href="https://github.com/imCaoQuoc/nguyencaoquoc/blob/main/CERTIFICATE_LANDING_PAGE_IBM_DATA_SCIENCE.jpeg" target="_blank" rel="noopener">
-              <div class="contact-icon">
-                <i class="fas fa-chart-line"></i>
-              </div>
-              <div>
-                <h4>IBM Data Scientist</h4>
-                <p>Coursera Professional Certificate</p>
-              </div>
-            </a>
+          <div>
+            <h4>LinkedIn</h4>
+            <a href="https://linkedin.com/in/caoquocnguyen" target="_blank" style="color: var(--primary); text-decoration: none;">linkedin.com/in/caoquocnguyen</a>
           </div>
-        </section>
-
-        <section id="contact" class="section">
-          <h2 data-aos="fade-up">Let's Connect</h2>
-          <div class="contact-grid">
-            <div class="contact-item" data-aos="fade-up" data-aos-delay="50">
-              <div class="contact-icon">
-                <i class="fas fa-envelope"></i>
-              </div>
-              <div>
-                <h4>Email</h4>
-                <a href="mailto:caoquoc.job@gmail.com">caoquoc.job@gmail.com</a>
-              </div>
-            </div>
-
-            <div class="contact-item" data-aos="fade-up" data-aos-delay="100">
-              <div class="contact-icon">
-                <i class="fas fa-phone"></i>
-              </div>
-              <div>
-                <h4>Phone</h4>
-                <a href="tel:+84929791239">+84 929 791 239</a>
-              </div>
-            </div>
-
-            <div class="contact-item" data-aos="fade-up" data-aos-delay="150">
-              <div class="contact-icon">
-                <i class="fab fa-linkedin"></i>
-              </div>
-              <div>
-                <h4>LinkedIn</h4>
-                <a href="https://linkedin.com/in/caoquocnguyen" target="_blank">caoquocnguyen</a>
-              </div>
-            </div>
-          </div>
-        </section>
-      </section>
-    </main>
+        </div>
+      </div>
+    </section>
 
     <footer class="footer">
       <div class="container">
@@ -787,16 +846,31 @@
       </div>
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
 
+    
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    
     <script>
-      // Smooth scrolling for Navigation Links
+      // Scroll Progress
+      window.addEventListener('scroll', function() {
+        var scrolled = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        document.getElementById('scrollProgress').style.width = scrolled + '%';
+      });
+
+      // Smooth Scrolling for Navigation Links
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+          e.preventDefault();
           const target = document.querySelector(this.getAttribute('href'));
           if (target) {
-            e.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
           }
         });
       });
@@ -804,20 +878,50 @@
       // Init AOS (scroll animations)
       AOS.init({ once: true, offset: 80, duration: 700, easing: 'ease-out-cubic' });
 
-      // Nav shrink on scroll
+      // Typed.js removed: headline is now static "AI Engineer"
+
+      // Nav shrink + back-to-top toggle
       const nav = document.querySelector('.nav');
+      const backToTop = document.getElementById('backToTop');
       const toggleScrolled = () => {
         const y = window.scrollY;
         nav.classList.toggle('scrolled', y > 10);
+        if (y > 400) backToTop.classList.add('show'); else backToTop.classList.remove('show');
       };
       toggleScrolled();
       window.addEventListener('scroll', toggleScrolled);
 
+      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // Animated counters
+      const counters = Array.from(document.querySelectorAll('.stat-number[data-target]'));
+      const counterObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const target = parseInt(el.getAttribute('data-target') || '0', 10);
+          const suffix = el.getAttribute('data-suffix') || '';
+          let current = 0;
+          const duration = 1200;
+          const start = performance.now();
+          const step = (now) => {
+            const p = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - p, 3);
+            const value = Math.floor(eased * target);
+            el.textContent = value + suffix;
+            if (p < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+          obs.unobserve(el);
+        });
+      }, { threshold: 0.4 });
+      counters.forEach(c => counterObserver.observe(c));
+
       // Active nav highlight on scroll
       const sections = Array.from(document.querySelectorAll('section[id]'));
-      const navLinks = Array.from(document.querySelectorAll('.links a, .side-nav a'));
+      const navLinks = Array.from(document.querySelectorAll('.links a'));
       const setActive = () => {
-        const y = window.scrollY + 140;
+        const y = window.scrollY + 120;
         let current = sections[0]?.id;
         for (const s of sections) {
           if (y >= s.offsetTop) current = s.id;
@@ -830,6 +934,8 @@
       };
       setActive();
       window.addEventListener('scroll', setActive);
+
+
 
       // Year
       document.getElementById('year').textContent = new Date().getFullYear();
