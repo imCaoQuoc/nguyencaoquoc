@@ -743,6 +743,23 @@
         text-transform: uppercase;
       }
 
+      .lang-toggle {
+        appearance: none;
+        border: 0;
+        background: transparent;
+        color: inherit;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 900;
+        padding: 0;
+        text-transform: uppercase;
+      }
+
+      .lang-toggle:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 4px;
+      }
+
       .nav-symbol {
         font-size: 1.8rem;
         line-height: 1;
@@ -1186,8 +1203,7 @@
           margin-right: 0;
         }
 
-        .side-rail,
-        .nav-code {
+        .side-rail {
           display: none;
         }
 
@@ -1361,7 +1377,10 @@
           <li><a href="#certificates">Certification</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-        <div class="nav-code" aria-hidden="true"><span>ENG</span><span class="nav-symbol">&gt;/&lt;</span></div>
+        <div class="nav-code">
+          <button class="lang-toggle" id="languageToggle" type="button" aria-label="Switch to Vietnamese">ENG</button>
+          <span class="nav-symbol" aria-hidden="true">&gt;/&lt;</span>
+        </div>
       </div>
     </nav>
 
@@ -1712,17 +1731,391 @@
     
 
     <script>
-      // Scroll Progress
-      window.addEventListener('scroll', function() {
-        var scrolled = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-        document.getElementById('scrollProgress').style.width = scrolled + '%';
+      const nav = document.querySelector('.nav');
+      const backToTop = document.getElementById('backToTop');
+      const scrollProgress = document.getElementById('scrollProgress');
+      const languageButton = document.getElementById('languageToggle');
+      const sections = Array.from(document.querySelectorAll('section[id]'));
+      const navLinks = Array.from(document.querySelectorAll('.links a'));
+      const metaDescription = document.querySelector('meta[name="description"]');
+      const originalTitle = document.title;
+      const originalDescription = metaDescription ? metaDescription.getAttribute('content') : '';
+      let currentLanguage = 'en';
+
+      const translationGroups = [
+        {
+          selector: '.skip-link',
+          vi: ['Bỏ qua đến nội dung chính']
+        },
+        {
+          selector: '.top-strip span',
+          vi: [
+            'Chào mừng đến với Nguyen Cao Quoc, kỹ sư AI',
+            'caoquoc.work@gmail.com | +84 929 791 239'
+          ]
+        },
+        {
+          selector: '.links a',
+          vi: ['Kinh nghiệm', 'Kỹ năng', 'Công bố', 'Giải thưởng', 'Học vấn', 'Chứng chỉ', 'Liên hệ']
+        },
+        {
+          selector: '.side-rail',
+          vi: ['Kỹ sư AI | Thị giác máy tính | LLM/VLM | Agentic AI']
+        },
+        {
+          selector: '.hero-label',
+          vi: ['Hồ sơ AI cá nhân']
+        },
+        {
+          selector: '.hero h1 .accent',
+          vi: ['KỸ SƯ<br>AI']
+        },
+        {
+          selector: '.hero-content > p',
+          vi: ['Đam mê xây dựng các sản phẩm AI hữu ích với hiệu năng và độ chính xác cao. Có 3 năm kinh nghiệm phát triển ứng dụng AI native, thành thạo nhiều công nghệ AI hiện đại, có kinh nghiệm lập trình đồng thời và tối ưu hiệu năng. Đồng thời có kinh nghiệm nghiên cứu và đánh giá các giải pháp AI. Hiện đang theo học chương trình Thạc sĩ Khoa học Máy tính để mở rộng và đào sâu kiến thức AI.']
+        },
+        {
+          selector: '.hero .btn',
+          vi: ['Liên hệ', 'LinkedIn']
+        },
+        {
+          selector: '.panel-top span',
+          vi: ['Trọng tâm hiện tại', 'Ứng dụng AI native']
+        },
+        {
+          selector: '.code-line span',
+          vi: [
+            'Nền tảng Agentic AI cho y tế, hợp đồng, CRM và chăm sóc khách hàng.',
+            'Hệ thống Computer Vision cho nhận diện khuôn mặt và phát hiện/đếm SKU.',
+            'Nghiên cứu LLM/VLM, đánh giá prompt, RAG và quy trình NLP có khả năng giải thích.'
+          ]
+        },
+        {
+          selector: '.panel-bottom span',
+          vi: ['Kỹ sư AI', 'TP.HCM, Việt Nam']
+        },
+        {
+          selector: '.stat-label',
+          vi: ['Bài báo khoa học', 'Năm kinh nghiệm', 'Công ty AI', 'Công nghệ']
+        },
+        {
+          selector: '#experience h2',
+          vi: ['Kinh nghiệm chuyên môn']
+        },
+        {
+          selector: '#experience .titem h3',
+          vi: [
+            'Kỹ sư AI — TMA Solutions',
+            'Thực tập sinh Kỹ sư AI — VINAI RESEARCH',
+            'Kỹ sư AI — VIETVANG CONSULTING'
+          ]
+        },
+        {
+          selector: '#experience .titem > p em',
+          vi: ['01/2025 – 03/2026', '09/2024 – 01/2025', '01/2024 – 09/2024']
+        },
+        {
+          selector: '#experience .titem h4',
+          vi: [
+            'Nền tảng Agentic TMA',
+            'CadenceAI - Trích xuất hợp đồng lâm sàng và đối soát hóa đơn',
+            'Tác tử CRM thông minh',
+            'Tác tử chăm sóc khách hàng',
+            'Hệ thống nhận diện khuôn mặt',
+            'BigC - Hệ thống phát hiện và đếm SKU'
+          ]
+        },
+        {
+          selector: '#experience li',
+          vi: [
+            'Triển khai <strong>các tác tử AI cho lĩnh vực y tế</strong> nhằm cung cấp giải pháp thông minh, cải thiện khả năng thích ứng với nhu cầu ngành',
+            'Đảm nhận phát triển <strong>module ngôn ngữ động</strong>, cho phép hành vi của agent thích ứng và nhận biết ngữ cảnh',
+            'Xây dựng các workflow thông minh trong <strong>nhãn khoa</strong> để tăng tự động hóa quy trình và hỗ trợ quyết định lâm sàng',
+            'Đảm nhận xây dựng kiến trúc nền tảng cho các dịch vụ AI',
+            'Khai thác <strong>Azure Cloud</strong>, <strong>LangGraph</strong> và <strong>Pydantic Agent</strong> để tạo Contract Extraction Agent và Invoice Validation Agent',
+            'Đảm bảo định dạng đầu ra của Agent để nhúng vào cơ sở dữ liệu <strong>Milvus</strong>',
+            'Đảm bảo tính chính xác và đầy đủ của thông tin trước bước đối soát hóa đơn',
+            'Triển khai các luồng dịch vụ AI Agent chạy đồng thời, cải thiện tốc độ thực thi <strong>50%</strong>',
+            'Thiết kế và tinh chỉnh prompt, sử dụng <strong>Pydantic</strong> để ràng buộc định dạng JSON nghiêm ngặt từ LLM',
+            'Sử dụng định dạng <strong>TOON</strong> trong các trường hợp phù hợp để giảm lượng token',
+            'Phối hợp với tech lead để thiết kế logic đối soát hóa đơn-hợp đồng, cải thiện độ chính xác tổng thể <strong>40%</strong>',
+            'Phát triển và tối ưu module lead scoring bằng mô hình AI tích hợp với <strong>HubSpot API</strong> thông qua webhook events',
+            'Xây dựng công cụ AI tạo báo giá tự động bằng <strong>FastMCP</strong>, giảm thao tác thủ công trong quy trình bán hàng',
+            '<strong>Tinh chỉnh prompt LLM</strong> cho bài toán khớp sản phẩm-số lượng, tăng tính dễ dùng và giảm lỗi khớp dữ liệu',
+            'Nghiên cứu và triển khai <strong>hệ thống gợi ý</strong> dựa trên hướng tiếp cận <strong>Collaborative Filtering</strong>',
+            'Cung cấp insight và cải tiến hệ thống để tối ưu quy trình bán hàng và tăng cường hỗ trợ ra quyết định cho các đơn vị kinh doanh',
+            'Phát triển <strong>Customer Navigation Agent</strong> sử dụng <strong>thuật toán A*</strong> để hướng dẫn người dùng trong môi trường trung tâm thương mại',
+            'Xây dựng executable tools cho <strong>Customer Service Agent</strong> bằng <strong>FastMCP</strong> để tự động hóa việc thực thi tác vụ',
+            'Tích hợp agent vào <strong>TMA Agentic Platform</strong> để thực hiện demo proof-of-concept (<strong>POC</strong>) cho khách hàng',
+            'Nghiên cứu và tích hợp <strong>ArcFace Loss</strong> vào mô hình Deep Learning để cải thiện hiệu năng <strong>Face Identification</strong>',
+            'Đánh giá mô hình bằng các metric <strong>TAR@FAR</strong>, độ chính xác trên <strong>IJBB/IJBC</strong> và so sánh với baseline',
+            'Phân tích tác động của <strong>Cosine Scheduler</strong> lên điều chỉnh learning rate và khả năng hội tụ của mô hình',
+            'Sử dụng <strong>FastAPI</strong> để phát triển demo tương tác, thể hiện năng lực của giải pháp',
+            'Tạo và gán nhãn bộ dữ liệu ảnh bằng <strong>Labelme</strong>, đảm bảo dữ liệu huấn luyện đáng tin cậy cho phát hiện và đếm SKU',
+            'Nghiên cứu kiến trúc <strong>YOLOv10</strong>, biên soạn tài liệu chi tiết làm tham chiếu kỹ thuật cho đội dự án',
+            '<strong>Tinh chỉnh mô hình</strong> trên bộ dữ liệu tùy chỉnh và đánh giá hiệu năng. Cải thiện độ chính xác trên dữ liệu thực tế',
+            'Phát triển <strong>POC</strong> tương tác để trình diễn năng lực <strong>YOLOv10</strong>, giúp khách hàng hiểu ứng dụng và bối cảnh sử dụng AI',
+            'Sử dụng <strong>FastAPI</strong> để triển khai API hỗ trợ đội phát triển xây dựng ứng dụng hướng khách hàng'
+          ]
+        },
+        {
+          selector: '#skills h2',
+          vi: ['Kỹ năng kỹ thuật']
+        },
+        {
+          selector: '#skills .card h3',
+          vi: ['Khái niệm AI cốt lõi', 'Ngôn ngữ lập trình', 'Framework & Thư viện', 'Cloud & Công cụ', 'Cơ sở dữ liệu']
+        },
+        {
+          selector: '#skills .pill',
+          vi: [
+            'Học sâu', 'Học máy', 'AI tạo sinh', 'RAG', 'Thị giác máy tính', 'NLP',
+            'Python',
+            'PyTorch', 'TensorFlow', 'LangChain', 'LangGraph', 'LlamaIndex', 'FastAPI',
+            'Azure Cloud', 'Docker', 'Model Context Protocol',
+            'PostgreSQL', 'MongoDB', 'Milvus (Vector DB)'
+          ]
+        },
+        {
+          selector: '#publications h2',
+          vi: ['Công bố khoa học']
+        },
+        {
+          selector: '#publications h3',
+          vi: ['Explainable Intelligence in Digital Twins (EIDT - hội nghị được Scopus index)']
+        },
+        {
+          selector: '#publications .card > p',
+          vi: [
+            '<em>Le Xuan Tung và <strong>Nguyen Cao Quoc</strong>: <i>Leveraging Large Language Models as Faithful Explainer for Text Classification</i> - EIDT 2025.</em>',
+            'Phát triển framework dựa trên prompt, độc lập mô hình, biến GPT-3.5/4o thành bộ giải thích post-hoc cho các BERT classifier trên benchmark 20 Newsgroups và IMDB. Hệ thống xếp hạng các token có ảnh hưởng và tạo rationale bằng ngôn ngữ tự nhiên, tăng độ tin cậy và hỗ trợ debug cho các workload NLP có yêu cầu cao.'
+          ]
+        },
+        {
+          selector: '#publications h4',
+          vi: ['Đóng góp chính', 'Tác động']
+        },
+        {
+          selector: '#publications li',
+          vi: [
+            'Thiết kế prompt theo persona và chain-of-thought để buộc LLM xuất top-k từ nổi bật cùng rationale có tính faithful.',
+            'Thực hiện nghiên cứu faithfulness bằng cách xóa các token do LLM xác định để đo mức giảm xác suất, benchmark với LIME và SHAP.',
+            'Cho thấy GPT-4o tiệm cận hoặc vượt SHAP ở k cao hơn, đồng thời cung cấp diễn giải dễ hiểu cho hành vi classifier.',
+            'Độ chính xác 20 Newsgroups: 75.08% (BERT), với giải thích GPT-4o đạt fidelity tương đương SHAP tại k ≥ 7.',
+            'Độ chính xác sentiment IMDB: 92.89%, trong đó giải thích GPT-4o nhất quán vượt LIME và SHAP khi k &gt; 1.',
+            'Nhận ghi nhận và chứng nhận EIDT nhờ đóng góp cho workflow NLP minh bạch.'
+          ]
+        },
+        {
+          selector: '#publications .btn',
+          vi: ['Liên kết: Springer Lecture Notes in Electrical Engineering', 'Xem chứng nhận']
+        },
+        {
+          selector: '#achievements h2',
+          vi: ['Danh hiệu & Giải thưởng']
+        },
+        {
+          selector: '#achievements h3',
+          vi: ['SOICT Hackathon 2024 – Giải Nhất']
+        },
+        {
+          selector: '#achievements .card > p',
+          vi: ['<em>11/2024 – 01/2025</em>', '<strong>Track:</strong> Samsung – Ứng dụng AI']
+        },
+        {
+          selector: '#achievements h4',
+          vi: ['Chatbot cho tài liệu hành chính']
+        },
+        {
+          selector: '#achievements li',
+          vi: [
+            'Sử dụng <strong>Python</strong> và <strong>Llama-Cloud API</strong> để xử lý dữ liệu thô thành định dạng yêu cầu',
+            'Khai thác <strong>Llama-Index API</strong> để chuyển đổi dữ liệu sang định dạng markdown với quy ước đặt tên phù hợp',
+            'Xử lý dữ liệu bảng trong tệp, đảm bảo bảo toàn nội dung quan trọng trong quá trình xử lý',
+            'Sử dụng <strong>OpenAI API</strong> để phát triển hệ thống tạo FAQ liên quan đến nội dung tệp',
+            'Thực hiện kiểm tra chất lượng và tinh chỉnh để đảm bảo độ chính xác và mức độ liên quan của nội dung sinh ra',
+            'Phối hợp với các thành viên trong đội để thiết kế, xây dựng và kiểm thử trải nghiệm chatbot liền mạch'
+          ]
+        },
+        {
+          selector: '#achievements .btn',
+          vi: ['Tổng kết sự kiện']
+        },
+        {
+          selector: '#education h2',
+          vi: ['Học vấn']
+        },
+        {
+          selector: '#education h3',
+          vi: ['Thạc sĩ Khoa học Máy tính', 'Cử nhân Khoa học Máy tính']
+        },
+        {
+          selector: '#education .card > p',
+          vi: [
+            '<strong>Trường Đại học Công nghệ Thông tin, Đại học Quốc gia TP.HCM</strong>',
+            '<em>2024 – Hiện tại</em>',
+            'Định hướng: Computer Vision và Large Language Models/Vision Language Models',
+            '<strong>Trường Đại học Công nghệ Thông tin, Đại học Quốc gia TP.HCM</strong>',
+            '<em>2020 – 2024</em>',
+            '<strong>GPA: 7.27/10</strong>'
+          ]
+        },
+        {
+          selector: '#certificates h2',
+          vi: ['Chứng chỉ']
+        },
+        {
+          selector: '#certificates .cert-meta p',
+          vi: ['Chứng chỉ tiếng Anh', 'Chứng chỉ chuyên môn Coursera', 'Chứng chỉ chuyên môn Coursera']
+        },
+        {
+          selector: '#certificates .cert-cta',
+          vi: ['Xem chứng chỉ', 'Xem chứng chỉ', 'Xem chứng chỉ']
+        },
+        {
+          selector: '#contact h2',
+          vi: ['Liên hệ']
+        },
+        {
+          selector: '#contact .contact-item h4',
+          vi: ['Email', 'Điện thoại', 'LinkedIn']
+        },
+        {
+          selector: '.footer p',
+          vi: ['&copy; <span id="year"></span> Nguyen Cao Quoc. Được xây dựng với đam mê dành cho AI và đổi mới sáng tạo.']
+        },
+        {
+          selector: '#backToTop',
+          vi: ['Lên']
+        }
+      ];
+
+      const attributeTranslations = [
+        {
+          selector: '.hero .cta-row',
+          attribute: 'aria-label',
+          vi: ['Hành động chính']
+        },
+        {
+          selector: '.hero-panel',
+          attribute: 'aria-label',
+          vi: ['Trọng tâm AI hiện tại']
+        },
+        {
+          selector: '#backToTop',
+          attribute: 'aria-label',
+          vi: ['Lên đầu trang']
+        }
+      ];
+
+      const originalHtml = new Map();
+      const originalAttributes = new Map();
+
+      const keyFor = (selector, index, attribute) => `${selector}::${index}${attribute ? `::${attribute}` : ''}`;
+
+      translationGroups.forEach((group) => {
+        document.querySelectorAll(group.selector).forEach((element, index) => {
+          originalHtml.set(keyFor(group.selector, index), element.innerHTML);
+        });
       });
 
-      // Smooth Scrolling for Navigation Links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
+      attributeTranslations.forEach((group) => {
+        document.querySelectorAll(group.selector).forEach((element, index) => {
+          originalAttributes.set(keyFor(group.selector, index, group.attribute), element.getAttribute(group.attribute) || '');
+        });
+      });
+
+      const getStoredLanguage = () => {
+        const requestedLanguage = new URLSearchParams(window.location.search).get('lang');
+        if (requestedLanguage === 'vi' || requestedLanguage === 'en') {
+          return requestedLanguage;
+        }
+        try {
+          return localStorage.getItem('portfolioLanguage') === 'vi' ? 'vi' : 'en';
+        } catch (error) {
+          return 'en';
+        }
+      };
+
+      const storeLanguage = (language) => {
+        try {
+          localStorage.setItem('portfolioLanguage', language);
+        } catch (error) {
+          // localStorage can be unavailable for some file:// privacy settings.
+        }
+      };
+
+      const setYear = () => {
+        const year = document.getElementById('year');
+        if (year) {
+          year.textContent = new Date().getFullYear();
+        }
+      };
+
+      const applyLanguage = (language) => {
+        currentLanguage = language === 'vi' ? 'vi' : 'en';
+        document.documentElement.lang = currentLanguage === 'vi' ? 'vi' : 'en';
+        document.title = currentLanguage === 'vi' ? 'Nguyen Cao Quoc - Kỹ sư AI' : originalTitle;
+        if (metaDescription) {
+          metaDescription.setAttribute(
+            'content',
+            currentLanguage === 'vi'
+              ? 'Kỹ sư AI có chuyên môn về Computer Vision, LLM/VLM, Face Recognition và Agentic AI Platforms. Học viên cao học với 3 năm kinh nghiệm trong ngành.'
+              : originalDescription
+          );
+        }
+
+        translationGroups.forEach((group) => {
+          document.querySelectorAll(group.selector).forEach((element, index) => {
+            const original = originalHtml.get(keyFor(group.selector, index));
+            const translated = group.vi[index];
+            element.innerHTML = currentLanguage === 'vi' && translated !== undefined ? translated : original;
+          });
+        });
+
+        attributeTranslations.forEach((group) => {
+          document.querySelectorAll(group.selector).forEach((element, index) => {
+            const original = originalAttributes.get(keyFor(group.selector, index, group.attribute));
+            const translated = group.vi[index];
+            element.setAttribute(group.attribute, currentLanguage === 'vi' && translated !== undefined ? translated : original);
+          });
+        });
+
+        languageButton.textContent = currentLanguage === 'vi' ? 'VIE' : 'ENG';
+        languageButton.setAttribute('aria-label', currentLanguage === 'vi' ? 'Switch to English' : 'Chuyển sang tiếng Việt');
+        storeLanguage(currentLanguage);
+        setYear();
+      };
+
+      const updateScrollProgress = () => {
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = maxScroll > 0 ? (window.pageYOffset / maxScroll) * 100 : 0;
+        scrollProgress.style.width = scrolled + '%';
+      };
+
+      const toggleScrolled = () => {
+        const y = window.scrollY;
+        nav.classList.toggle('scrolled', y > 10);
+        if (y > 400) backToTop.classList.add('show'); else backToTop.classList.remove('show');
+      };
+
+      const setActive = () => {
+        const y = window.scrollY + 120;
+        let current = sections[0]?.id;
+        for (const section of sections) {
+          if (y >= section.offsetTop) current = section.id;
+        }
+        navLinks.forEach((anchor) => {
+          const href = anchor.getAttribute('href') || '';
+          const id = href.startsWith('#') ? href.slice(1) : '';
+          anchor.classList.toggle('active', id === current);
+        });
+      };
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', (event) => {
+          event.preventDefault();
+          const target = document.querySelector(anchor.getAttribute('href'));
           if (target) {
             target.scrollIntoView({
               behavior: 'smooth',
@@ -1732,41 +2125,20 @@
         });
       });
 
-      // Nav shrink + back-to-top toggle
-      const nav = document.querySelector('.nav');
-      const backToTop = document.getElementById('backToTop');
-      const toggleScrolled = () => {
-        const y = window.scrollY;
-        nav.classList.toggle('scrolled', y > 10);
-        if (y > 400) backToTop.classList.add('show'); else backToTop.classList.remove('show');
-      };
-      toggleScrolled();
-      window.addEventListener('scroll', toggleScrolled);
+      languageButton.addEventListener('click', () => {
+        applyLanguage(currentLanguage === 'vi' ? 'en' : 'vi');
+      });
 
       backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      window.addEventListener('scroll', updateScrollProgress, { passive: true });
+      window.addEventListener('scroll', toggleScrolled, { passive: true });
+      window.addEventListener('scroll', setActive, { passive: true });
+      window.addEventListener('resize', updateScrollProgress);
 
-      // Active nav highlight on scroll
-      const sections = Array.from(document.querySelectorAll('section[id]'));
-      const navLinks = Array.from(document.querySelectorAll('.links a'));
-      const setActive = () => {
-        const y = window.scrollY + 120;
-        let current = sections[0]?.id;
-        for (const s of sections) {
-          if (y >= s.offsetTop) current = s.id;
-        }
-        navLinks.forEach(a => {
-          const href = a.getAttribute('href') || '';
-          const id = href.startsWith('#') ? href.slice(1) : '';
-          a.classList.toggle('active', id === current);
-        });
-      };
+      applyLanguage(getStoredLanguage());
+      updateScrollProgress();
+      toggleScrolled();
       setActive();
-      window.addEventListener('scroll', setActive);
-
-
-
-      // Year
-      document.getElementById('year').textContent = new Date().getFullYear();
     </script>
   </body>
 </html>
