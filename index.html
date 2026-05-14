@@ -827,8 +827,8 @@
         grid-template-columns: 1.15fr 0.85fr;
         grid-template-areas:
           "title intro"
-          "title actions"
-          "title panel"
+          "portrait actions"
+          "portrait panel"
           "stats stats";
         gap: 1.5rem 3rem;
         align-items: start;
@@ -869,6 +869,21 @@
         font-weight: 900;
         line-height: 1.25;
         text-transform: uppercase;
+      }
+
+      .hero-portrait {
+        grid-area: portrait;
+        width: min(100%, 560px);
+        margin: 0.25rem 0 0;
+        border: 2px solid var(--line);
+        background: var(--paper-2);
+      }
+
+      .hero-portrait img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
       }
 
       .hero p {
@@ -1226,6 +1241,7 @@
           grid-template-columns: 1fr;
           grid-template-areas:
             "title"
+            "portrait"
             "intro"
             "actions"
             "panel"
@@ -1234,12 +1250,17 @@
         }
 
         .hero h1,
-        .hero p {
+        .hero p,
+        .hero-portrait {
           margin-top: 0;
         }
 
         .hero h1 {
           font-size: 4.3rem;
+        }
+
+        .hero-portrait {
+          width: min(100%, 680px);
         }
 
         .stats-grid,
@@ -1297,6 +1318,7 @@
         }
 
         .hero p,
+        .hero-portrait,
         .hero-panel,
         .hero .cta-row {
           max-width: 32ch;
@@ -1392,6 +1414,9 @@
 
       <div class="container hero-content" data-aos="fade-up" data-aos-duration="800">
   <h1><span class="hero-label">Personal AI Portfolio</span><span class="accent">AI<br>ENGINEER</span></h1>
+        <figure class="hero-portrait">
+          <img src="Untitled.jpeg" alt="Nguyen Cao Quoc portrait" />
+        </figure>
         <p>Passion in crafting useful AI products with high performance and accuracy. Have 3 years in developing native AI applications, skilled in many modern AI technologies, experienced with concurrency programming, performance optimization. Also have experiences in researching and evaluating AI solutions. Currently pursuing a Master's degree in Computer Science for wider and deeper AI knowledge.</p>
         <div class="cta-row" aria-label="primary actions">
           <a class="btn" href="#contact"><i class="fas fa-paper-plane" style="margin-right:8px"></i>Contact Me</a>
@@ -1593,7 +1618,7 @@
           <li>Earned EIDT recognition and certification for advancing transparent NLP workflows.</li>
         </ul>
         <div class="cta-row" style="justify-content: flex-start;">
-          <a class="btn" href="https://link.springer.com/book/9789819561100" target="_blank" rel="noopener">Link: Springer Lecture Notes in Electrical Engineering</a>
+          <a class="btn" href="https://link.springer.com/chapter/10.1007/978-981-95-6111-7_30" target="_blank" rel="noopener">Link: Springer Lecture Notes in Electrical Engineering</a>
           <a class="btn secondary" href="https://github.com/imCaoQuoc/nguyencaoquoc/blob/main/certs/EIDT-Cert-30.pdf" target="_blank" rel="noopener">View Certificate</a>
         </div>
       </div>
