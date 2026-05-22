@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Nguyen Cao Quoc - AI Engineer</title>
-    <meta name="description" content="AI Engineer with expertise in Computer Vision, LLMs/VLMs, Face Recognition, and Agentic AI Platforms. Master's student with 2 years of industry experience." />
+    <meta name="description" content="AI Engineer with expertise in Computer Vision, LLMs/VLMs, Face Recognition, and Agentic AI Platforms. Master's student with 3 years of industry experience." />
     <style>
       :root {
         --bg: #0b0f0c;              /* very dark greenish */
@@ -1475,6 +1475,21 @@
       <h2 data-aos="fade-up">Professional Experience</h2>
       <div class="timeline">
         <div class="titem card" data-aos="fade-up" data-aos-delay="50">
+          <h3><i class="fas fa-briefcase" style="color: var(--primary); margin-right: 0.5rem;"></i>Middle AI Engineer — Saigon Technology</h3>
+          <p><em><i class="fas fa-calendar-alt" style="color: var(--accent); margin-right: 0.5rem;"></i>Mar 2026 – Present</em></p>
+
+          <h4 style="color: var(--primary); margin-top: 1.5rem;">TitanHeat AI - HVAC Chatbot and Fault Diagnosis Platform</h4>
+          <ul>
+            <li>Designed an <strong>N-layer architecture</strong> to ensure clear responsibility boundaries and improve system maintainability</li>
+            <li>Used <strong>LangGraph</strong> to implement intent-driven flows to handle different customer requests</li>
+            <li>Developed a multi-mode fault diagnosis pipeline combining <strong>VLM + KB + LLM</strong> workflows to analyze HVAC fault images, retrieve structured technical knowledge and generate diagnostic recommendations</li>
+            <li>Optimized AI chatbot latency by implementing <strong>WebSocket token streaming</strong> and parallel intent routing + RAG retrieval, reducing perceived response time from <strong>9s to 3s</strong> and backend latency by <strong>23.1%</strong> while maintaining <strong>98.4%</strong> routing accuracy</li>
+            <li>Optimized RAG knowledge ingestion by transforming <strong>Excel-based diagnostic records</strong> into self-contained retrieval chunks with metadata filters, improving from <strong>84%</strong> faithfulness to <strong>100%</strong> faithfulness in evaluation</li>
+            <li>Integrated <strong>xAI Grok models</strong>, <strong>xAI Collections</strong>, <strong>Redis</strong> and <strong>AWS S3</strong> to support RAG retrieval, session persistence, image processing and cloud deployment</li>
+          </ul>
+        </div>
+
+        <div class="titem card" data-aos="fade-up" data-aos-delay="50">
           <h3><i class="fas fa-briefcase" style="color: var(--primary); margin-right: 0.5rem;"></i>AI Engineer — TMA Solutions</h3>
           <p><em><i class="fas fa-calendar-alt" style="color: var(--accent); margin-right: 0.5rem;"></i>Jan 2025 – Mar 2026</em></p>
 
@@ -1581,8 +1596,11 @@
         <h3><i class="fas fa-cloud" style="color: var(--primary); margin-right: 0.5rem;"></i>Cloud & Tools</h3>
         <div class="pillset">
           <span class="pill">Azure Cloud</span>
+          <span class="pill">AWS</span>
           <span class="pill">Docker</span>
           <span class="pill">Model Context Protocol</span>
+          <span class="pill">Claude</span>
+          <span class="pill">Codex</span>
         </div>
       </div>
 
@@ -1830,6 +1848,7 @@
         {
           selector: '#experience .titem h3',
           vi: [
+            'Kỹ sư AI trung cấp — Saigon Technology',
             'Kỹ sư AI — TMA Solutions',
             'Thực tập sinh Kỹ sư AI — VINAI RESEARCH',
             'Kỹ sư AI — VIETVANG CONSULTING'
@@ -1837,11 +1856,12 @@
         },
         {
           selector: '#experience .titem > p em',
-          vi: ['01/2025 – 03/2026', '09/2024 – 01/2025', '01/2024 – 09/2024']
+          vi: ['03/2026 – Hiện tại', '01/2025 – 03/2026', '09/2024 – 01/2025', '01/2024 – 09/2024']
         },
         {
           selector: '#experience .titem h4',
           vi: [
+            'TitanHeat AI - Chatbot HVAC và nền tảng chẩn đoán lỗi',
             'Nền tảng Agentic TMA',
             'CadenceAI - Trích xuất hợp đồng lâm sàng và đối soát hóa đơn',
             'Tác tử CRM thông minh',
@@ -1853,6 +1873,12 @@
         {
           selector: '#experience li',
           vi: [
+            'Thiết kế <strong>kiến trúc N-layer</strong> để đảm bảo ranh giới trách nhiệm rõ ràng và cải thiện khả năng bảo trì hệ thống',
+            'Sử dụng <strong>LangGraph</strong> để triển khai các luồng theo intent, xử lý nhiều loại yêu cầu khách hàng khác nhau',
+            'Phát triển pipeline chẩn đoán lỗi đa chế độ kết hợp workflow <strong>VLM + KB + LLM</strong> để phân tích ảnh lỗi HVAC, truy xuất tri thức kỹ thuật có cấu trúc và tạo khuyến nghị chẩn đoán',
+            'Tối ưu độ trễ chatbot AI bằng <strong>WebSocket token streaming</strong> và định tuyến intent song song + truy xuất RAG, giảm thời gian phản hồi cảm nhận từ <strong>9s xuống 3s</strong> và độ trễ backend <strong>23.1%</strong> trong khi duy trì độ chính xác định tuyến <strong>98.4%</strong>',
+            'Tối ưu quá trình nạp tri thức RAG bằng cách chuyển đổi <strong>bản ghi chẩn đoán dựa trên Excel</strong> thành các retrieval chunk độc lập với metadata filter, cải thiện faithfulness từ <strong>84%</strong> lên <strong>100%</strong> trong đánh giá',
+            'Tích hợp <strong>xAI Grok models</strong>, <strong>xAI Collections</strong>, <strong>Redis</strong> và <strong>AWS S3</strong> để hỗ trợ truy xuất RAG, lưu phiên, xử lý ảnh và triển khai cloud',
             'Triển khai <strong>các tác tử AI cho lĩnh vực y tế</strong> nhằm cung cấp giải pháp thông minh, cải thiện khả năng thích ứng với nhu cầu ngành',
             'Đảm nhận phát triển <strong>module ngôn ngữ động</strong>, cho phép hành vi của agent thích ứng và nhận biết ngữ cảnh',
             'Xây dựng các workflow thông minh trong <strong>nhãn khoa</strong> để tăng tự động hóa quy trình và hỗ trợ quyết định lâm sàng',
@@ -1897,7 +1923,7 @@
             'Học sâu', 'Học máy', 'AI tạo sinh', 'RAG', 'Thị giác máy tính', 'NLP',
             'Python',
             'PyTorch', 'TensorFlow', 'LangChain', 'LangGraph', 'LlamaIndex', 'FastAPI',
-            'Azure Cloud', 'Docker', 'Model Context Protocol',
+            'Azure Cloud', 'AWS', 'Docker', 'Model Context Protocol', 'Claude', 'Codex',
             'PostgreSQL', 'MongoDB', 'Milvus (Vector DB)'
           ]
         },
