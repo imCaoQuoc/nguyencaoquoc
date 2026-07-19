@@ -1478,14 +1478,17 @@
           <h3><i class="fas fa-briefcase" style="color: var(--primary); margin-right: 0.5rem;"></i>Middle AI Engineer — Saigon Technology</h3>
           <p><em><i class="fas fa-calendar-alt" style="color: var(--accent); margin-right: 0.5rem;"></i>Mar 2026 – Present</em></p>
 
-          <h4 style="color: var(--primary); margin-top: 1.5rem;">TitanHeat AI - HVAC Chatbot and Fault Diagnosis Platform</h4>
+          <h4 style="color: var(--primary); margin-top: 1.5rem;">Content Moderation & Document Intelligence Platform</h4>
           <ul>
-            <li>Designed an <strong>N-layer architecture</strong> to ensure clear responsibility boundaries and improve system maintainability</li>
-            <li>Used <strong>LangGraph</strong> to implement intent-driven flows to handle different customer requests</li>
-            <li>Developed a multi-mode fault diagnosis pipeline combining <strong>VLM + KB + LLM</strong> workflows to analyze HVAC fault images, retrieve structured technical knowledge and generate diagnostic recommendations</li>
-            <li>Optimized AI chatbot latency by implementing <strong>WebSocket token streaming</strong> and parallel intent routing + RAG retrieval, reducing perceived response time from <strong>9s to 3s</strong> and backend latency by <strong>23.1%</strong> while maintaining <strong>98.4%</strong> routing accuracy</li>
-            <li>Optimized RAG knowledge ingestion by transforming <strong>Excel-based diagnostic records</strong> into self-contained retrieval chunks with metadata filters, improving from <strong>84%</strong> faithfulness to <strong>100%</strong> faithfulness in evaluation</li>
-            <li>Integrated <strong>xAI Grok models</strong>, <strong>xAI Collections</strong>, <strong>Redis</strong> and <strong>AWS S3</strong> to support RAG retrieval, session persistence, image processing and cloud deployment</li>
+            <li>Built a real-time AI-powered <strong>content moderation and document intelligence backend</strong>, handling multi-modal content safety (text, image, PDF), automated document parsing with badge assignment, and an AI posting assistant through both synchronous and asynchronous REST APIs</li>
+            <li>Designed and implemented an <strong>N-Layer architecture</strong>, refactoring over <strong>2000+ lines</strong> of monolithic code into focused, testable and maintainable modules</li>
+            <li>Reduced content moderation processing time by approximately <strong>83%</strong> by converting sequential moderation tasks into parallel execution using <strong>asyncio</strong> concurrent pipelines and batch processing</li>
+            <li>Built a multi-modal <strong>content moderation pipeline</strong> supporting text, image and PDF, with each modality implemented as an independent <strong>Strategy</strong> class</li>
+            <li>Implemented text moderation by combining traditional algorithm-based detection with <strong>Azure AI Content Safety</strong> to detect sexual content, violence, hate speech and self-harm</li>
+            <li>Developed an image moderation pipeline integrating <strong>Azure AI Content Safety</strong>, <strong>OpenAI Vision</strong> for QR code detection, and <strong>Azure Document Intelligence OCR</strong> for embedded text extraction and re-analysis</li>
+            <li>Developed an AI-powered document parsing service using <strong>Azure Document Intelligence OCR</strong> and <strong>OpenAI</strong> for automated badge assignment based on extracted qualifications, including confidence scoring and manual review workflow</li>
+            <li>Containerized the application with <strong>Docker</strong>, ensuring production-grade deployment using <strong>Uvicorn</strong> with a single application entrypoint</li>
+            <li>Leveraged <strong>Azure Cloud</strong>, <strong>OpenAI</strong>, <strong>Azure AI Content Safety</strong>, <strong>Azure Document Intelligence</strong>, <strong>Azure Foundry</strong>, <strong>Blob Storage</strong>, <strong>FastAPI</strong>, <strong>Python</strong> and <strong>OpenCV</strong></li>
           </ul>
         </div>
 
@@ -1493,14 +1496,14 @@
           <h3><i class="fas fa-briefcase" style="color: var(--primary); margin-right: 0.5rem;"></i>AI Engineer — TMA Solutions</h3>
           <p><em><i class="fas fa-calendar-alt" style="color: var(--accent); margin-right: 0.5rem;"></i>Jan 2025 – Mar 2026</em></p>
 
-          <h4 style="color: var(--primary); margin-top: 1.5rem;">TMA Agentic Platform</h4>
+          <h4 style="color: var(--primary); margin-top: 1.5rem;">Agentic Platform</h4>
           <ul>
             <li>Implemented <strong>AI agents for healthcare</strong> applications to deliver intelligent solutions that improved adaptability to industry needs</li>
             <li>Took responsibility for developing a <strong>dynamic language module</strong> that enabled adaptive and context-aware for agent behavior</li>
             <li>Engineered intelligent workflows on <strong>ophthalmology</strong> to enhance process automation and improve clinical decision support</li>
           </ul>
 
-          <h4 style="color: var(--primary); margin-top: 1.5rem;">CadenceAI - Clinical Contracts Extraction and Invoice Matching</h4>
+          <h4 style="color: var(--primary); margin-top: 1.5rem;">Clinical Contracts Extraction and Invoice Matching</h4>
           <ul>
             <li>Took responsibility for building the foundational architecture of the AI services</li>
             <li>Leverage <strong>Azure Cloud</strong>, <strong>LangGraph</strong> and <strong>Pydantic Agent</strong> to create Contract Extraction Agent and Invoice Validation Agent</li>
@@ -1525,7 +1528,7 @@
           <ul>
             <li>Developed a <strong>Customer Navigation Agent</strong> using the <strong>A* pathfinding algorithm</strong> to guide users within a shopping mall environment</li>
             <li>Built executable tools for a <strong>Customer Service Agent</strong> using <strong>FastMCP</strong> to enable automated task execution</li>
-            <li>Integrated the agent into the <strong>TMA Agentic Platform</strong> to deliver a proof-of-concept (<strong>POC</strong>) demo for clients</li>
+            <li>Integrated the agent into the <strong>Agentic Platform</strong> to deliver a proof-of-concept (<strong>POC</strong>) demo for clients</li>
           </ul>
         </div>
 
@@ -1546,7 +1549,7 @@
           <h3><i class="fas fa-eye" style="color: var(--primary); margin-right: 0.5rem;"></i>AI Engineer — VIETVANG CONSULTING</h3>
           <p><em><i class="fas fa-calendar-alt" style="color: var(--accent); margin-right: 0.5rem;"></i>Jan 2024 – Sep 2024</em></p>
 
-          <h4 style="color: var(--primary); margin-top: 1.5rem;">BigC - Stock Keeping Unit Detection and Counting System</h4>
+          <h4 style="color: var(--primary); margin-top: 1.5rem;">Stock Keeping Unit Detection and Counting System</h4>
           <ul>
             <li>Created and labeled image datasets using <strong>Labelme</strong>, ensured reliable training data for SKU detection and counting</li>
             <li>Researched <strong>YOLOv10</strong> architecture, compiled detailed documentation to provide technical reference for project team</li>
@@ -1564,19 +1567,19 @@
       <div class="card" data-aos="fade-up" data-aos-delay="50">
         <h3><i class="fas fa-brain" style="color: var(--primary); margin-right: 0.5rem;"></i>Core AI Concepts</h3>
         <div class="pillset">
-          <span class="pill">Deep Learning</span>
+          <span class="pill">Deep Learning (Computer Vision, NLP)</span>
           <span class="pill">Machine Learning</span>
           <span class="pill">Generative AI</span>
           <span class="pill">RAG</span>
-          <span class="pill">Computer Vision</span>
-          <span class="pill">NLP</span>
+          <span class="pill">AI Agents</span>
+          <span class="pill">Model Context Protocol (MCP)</span>
         </div>
       </div>
 
       <div class="card" data-aos="fade-up" data-aos-delay="100">
         <h3><i class="fas fa-code" style="color: var(--primary); margin-right: 0.5rem;"></i>Languages</h3>
         <div class="pillset">
-          <span class="pill">Python</span>
+          <span class="pill">Python (willing to work with JavaScript/TypeScript)</span>
         </div>
       </div>
 
@@ -1589,18 +1592,21 @@
           <span class="pill">LangGraph</span>
           <span class="pill">LlamaIndex</span>
           <span class="pill">FastAPI</span>
+          <span class="pill">FastMCP</span>
+          <span class="pill">PydanticAI</span>
+          <span class="pill">OpenAI SDK</span>
         </div>
       </div>
 
       <div class="card" data-aos="fade-up" data-aos-delay="200">
         <h3><i class="fas fa-cloud" style="color: var(--primary); margin-right: 0.5rem;"></i>Cloud & Tools</h3>
         <div class="pillset">
-          <span class="pill">Azure Cloud</span>
-          <span class="pill">AWS</span>
+          <span class="pill">Azure (Foundry, OpenAI, Document Intelligence, Blob Storage)</span>
+          <span class="pill">AWS (EC2, S3, Bedrock)</span>
           <span class="pill">Docker</span>
-          <span class="pill">Model Context Protocol</span>
-          <span class="pill">Claude</span>
-          <span class="pill">Codex</span>
+          <span class="pill">Git</span>
+          <span class="pill">MCP</span>
+          <span class="pill">Agent-to-Agent (A2A)</span>
         </div>
       </div>
 
@@ -1609,7 +1615,9 @@
         <div class="pillset">
           <span class="pill">PostgreSQL</span>
           <span class="pill">MongoDB</span>
-          <span class="pill">Milvus (Vector DB)</span>
+          <span class="pill">Milvus</span>
+          <span class="pill">FAISS</span>
+          <span class="pill">Weaviate</span>
         </div>
       </div>
     </section>
@@ -1861,24 +1869,27 @@
         {
           selector: '#experience .titem h4',
           vi: [
-            'TitanHeat AI - Chatbot HVAC và nền tảng chẩn đoán lỗi',
+            'Nền tảng kiểm duyệt nội dung & trích xuất thông tin tài liệu',
             'Nền tảng Agentic TMA',
-            'CadenceAI - Trích xuất hợp đồng lâm sàng và đối soát hóa đơn',
+            'Trích xuất hợp đồng lâm sàng và đối soát hóa đơn',
             'Tác tử CRM thông minh',
             'Tác tử chăm sóc khách hàng',
             'Hệ thống nhận diện khuôn mặt',
-            'BigC - Hệ thống phát hiện và đếm SKU'
+            'Hệ thống phát hiện và đếm SKU'
           ]
         },
         {
           selector: '#experience li',
           vi: [
-            'Thiết kế <strong>kiến trúc N-layer</strong> để đảm bảo ranh giới trách nhiệm rõ ràng và cải thiện khả năng bảo trì hệ thống',
-            'Sử dụng <strong>LangGraph</strong> để triển khai các luồng theo intent, xử lý nhiều loại yêu cầu khách hàng khác nhau',
-            'Phát triển pipeline chẩn đoán lỗi đa chế độ kết hợp workflow <strong>VLM + KB + LLM</strong> để phân tích ảnh lỗi HVAC, truy xuất tri thức kỹ thuật có cấu trúc và tạo khuyến nghị chẩn đoán',
-            'Tối ưu độ trễ chatbot AI bằng <strong>WebSocket token streaming</strong> và định tuyến intent song song + truy xuất RAG, giảm thời gian phản hồi cảm nhận từ <strong>9s xuống 3s</strong> và độ trễ backend <strong>23.1%</strong> trong khi duy trì độ chính xác định tuyến <strong>98.4%</strong>',
-            'Tối ưu quá trình nạp tri thức RAG bằng cách chuyển đổi <strong>bản ghi chẩn đoán dựa trên Excel</strong> thành các retrieval chunk độc lập với metadata filter, cải thiện faithfulness từ <strong>84%</strong> lên <strong>100%</strong> trong đánh giá',
-            'Tích hợp <strong>xAI Grok models</strong>, <strong>xAI Collections</strong>, <strong>Redis</strong> và <strong>AWS S3</strong> để hỗ trợ truy xuất RAG, lưu phiên, xử lý ảnh và triển khai cloud',
+            'Xây dựng backend AI thời gian thực cho <strong>kiểm duyệt nội dung và trích xuất thông tin tài liệu</strong>, xử lý an toàn nội dung đa phương thức (văn bản, hình ảnh, PDF), tự động phân tích tài liệu kèm gán badge và trợ lý đăng bài AI thông qua cả REST API đồng bộ và bất đồng bộ',
+            'Thiết kế và triển khai <strong>kiến trúc N-Layer</strong>, tái cấu trúc hơn <strong>2000+ dòng</strong> code monolithic thành các module tập trung, dễ kiểm thử và bảo trì',
+            'Giảm khoảng <strong>83%</strong> thời gian xử lý kiểm duyệt nội dung bằng cách chuyển các tác vụ kiểm duyệt tuần tự sang thực thi song song với pipeline đồng thời <strong>asyncio</strong> và xử lý theo batch',
+            'Xây dựng <strong>pipeline kiểm duyệt nội dung</strong> đa phương thức hỗ trợ văn bản, hình ảnh và PDF, mỗi phương thức được triển khai như một lớp <strong>Strategy</strong> độc lập',
+            'Triển khai kiểm duyệt văn bản bằng cách kết hợp phát hiện dựa trên thuật toán truyền thống với <strong>Azure AI Content Safety</strong> để phát hiện nội dung tình dục, bạo lực, thù ghét và tự làm hại bản thân',
+            'Phát triển pipeline kiểm duyệt hình ảnh tích hợp <strong>Azure AI Content Safety</strong>, <strong>OpenAI Vision</strong> để phát hiện mã QR và <strong>Azure Document Intelligence OCR</strong> để trích xuất văn bản nhúng và phân tích lại',
+            'Phát triển dịch vụ phân tích tài liệu bằng AI sử dụng <strong>Azure Document Intelligence OCR</strong> và <strong>OpenAI</strong> để tự động gán badge dựa trên bằng cấp trích xuất được, bao gồm chấm điểm độ tin cậy và quy trình rà soát thủ công',
+            'Đóng gói ứng dụng với <strong>Docker</strong>, đảm bảo triển khai cấp production bằng <strong>Uvicorn</strong> với một entrypoint ứng dụng duy nhất',
+            'Khai thác <strong>Azure Cloud</strong>, <strong>OpenAI</strong>, <strong>Azure AI Content Safety</strong>, <strong>Azure Document Intelligence</strong>, <strong>Azure Foundry</strong>, <strong>Blob Storage</strong>, <strong>FastAPI</strong>, <strong>Python</strong> và <strong>OpenCV</strong>',
             'Triển khai <strong>các tác tử AI cho lĩnh vực y tế</strong> nhằm cung cấp giải pháp thông minh, cải thiện khả năng thích ứng với nhu cầu ngành',
             'Đảm nhận phát triển <strong>module ngôn ngữ động</strong>, cho phép hành vi của agent thích ứng và nhận biết ngữ cảnh',
             'Xây dựng các workflow thông minh trong <strong>nhãn khoa</strong> để tăng tự động hóa quy trình và hỗ trợ quyết định lâm sàng',
@@ -1897,7 +1908,7 @@
             'Cung cấp insight và cải tiến hệ thống để tối ưu quy trình bán hàng và tăng cường hỗ trợ ra quyết định cho các đơn vị kinh doanh',
             'Phát triển <strong>Customer Navigation Agent</strong> sử dụng <strong>thuật toán A*</strong> để hướng dẫn người dùng trong môi trường trung tâm thương mại',
             'Xây dựng executable tools cho <strong>Customer Service Agent</strong> bằng <strong>FastMCP</strong> để tự động hóa việc thực thi tác vụ',
-            'Tích hợp agent vào <strong>TMA Agentic Platform</strong> để thực hiện demo proof-of-concept (<strong>POC</strong>) cho khách hàng',
+            'Tích hợp agent vào <strong>Agentic Platform</strong> để thực hiện demo proof-of-concept (<strong>POC</strong>) cho khách hàng',
             'Nghiên cứu và tích hợp <strong>ArcFace Loss</strong> vào mô hình Deep Learning để cải thiện hiệu năng <strong>Face Identification</strong>',
             'Đánh giá mô hình bằng các metric <strong>TAR@FAR</strong>, độ chính xác trên <strong>IJBB/IJBC</strong> và so sánh với baseline',
             'Phân tích tác động của <strong>Cosine Scheduler</strong> lên điều chỉnh learning rate và khả năng hội tụ của mô hình',
@@ -1920,11 +1931,11 @@
         {
           selector: '#skills .pill',
           vi: [
-            'Học sâu', 'Học máy', 'AI tạo sinh', 'RAG', 'Thị giác máy tính', 'NLP',
-            'Python',
-            'PyTorch', 'TensorFlow', 'LangChain', 'LangGraph', 'LlamaIndex', 'FastAPI',
-            'Azure Cloud', 'AWS', 'Docker', 'Model Context Protocol', 'Claude', 'Codex',
-            'PostgreSQL', 'MongoDB', 'Milvus (Vector DB)'
+            'Học sâu (Computer Vision, NLP)', 'Học máy', 'AI tạo sinh', 'RAG', 'Tác tử AI (AI Agents)', 'Model Context Protocol (MCP)',
+            'Python (sẵn sàng làm việc với JavaScript/TypeScript)',
+            'PyTorch', 'TensorFlow', 'LangChain', 'LangGraph', 'LlamaIndex', 'FastAPI', 'FastMCP', 'PydanticAI', 'OpenAI SDK',
+            'Azure (Foundry, OpenAI, Document Intelligence, Blob Storage)', 'AWS (EC2, S3, Bedrock)', 'Docker', 'Git', 'MCP', 'Agent-to-Agent (A2A)',
+            'PostgreSQL', 'MongoDB', 'Milvus', 'FAISS', 'Weaviate'
           ]
         },
         {
